@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Arima:wght@300;400&family=Edu+TAS+Beginner:wght@600&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Nunito:wght@500&family=Poppins:wght@300&family=Space+Grotesk:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Arima:wght@300;400&family=Edu+TAS+Beginner:wght@600&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Nunito:wght@500&family=Poppins:wght@300&family=Space+Grotesk:wght@600&display=swap');
+
+:root {
+    --primary-color: #092035;
+
+    --heading-font-family: Arima;
+    --main-font-family: Lato;
+    --logo-font-family: Space Grotesk;
+
+    --font-size: 20px;
+}
+
+h1, h2, h3, h4, p, a {
+    font-family: var(--main-font-family);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--main-font-family);
+    width: 100%;
+}
+html, body { height: 100%; }

@@ -1,0 +1,103 @@
+.container {
+    font-size: var(--font-size);
+}
+
+.row-design {
+    margin: 40px auto;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.left {
+    background: var(--primary-color);
+    border-radius: 10px 0 0 10px;
+    text-align: center;
+    color: white;
+}
+
+.text {
+    margin: 100px 10px;
+}
+
+.text h1 {
+    font-family: var(--logo-font-family);
+    margin-bottom: 30px;
+}
+
+.text a {
+    color: white;
+    opacity: 0.6;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.text button {
+    width: 40%;
+    background: transparent;
+    padding: 4px 8px;
+    border: 1px solid white;
+    border-radius: 40px;
+    color: white;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.text button:hover {
+    background: white;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.content h1 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.content button {
+    text-align: center;
+}
+
+form {
+    padding: 1rem;
+    width: 80%;
+    border-radius: 10px;
+    position: relative;
+    margin: 0 auto;
+}
+
+input {
+    padding: 1.5rem;
+    margin-bottom: 30px;
+    background: transparent;
+    padding-left: 3rem;
+    border: 1px solid var(--primary-color);
+    font-size: 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+i {
+    position: absolute;
+    width: 2%;
+    padding: 10px;
+    /* top: 20%; */
+}
+
+.signup {
+    width: 40%;
+    background: var(--primary-color);
+    padding: 4px 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 40px;
+    color: white;
+    margin: 10px 0;
+    margin-left: 30%;
+    cursor: pointer;
+}
+
+.signup:hover{
+    opacity: 0.7;
+}

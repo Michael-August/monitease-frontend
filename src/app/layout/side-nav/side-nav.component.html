@@ -1,0 +1,38 @@
+<div class="side-bar" id="side-bar">
+    <div class="logo">
+        <h2><i class="fa fa-envira"></i>MonitEase</h2>
+    </div>
+    <div class="link-items" id="link-items">
+        <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-tachometer"></i>Dashboard</li>
+        <li class="nav-link collapsed" data-bs-target="#sales" data-bs-toggle="collapse">
+            <i class="fa fa-cart-plus"></i>
+            DailySales
+            <i class="fa fa-angle-right"></i>
+            <ul id="sales" class="nav-content collapse " data-bs-parent="#link-items">
+                <li>
+                    <i class="fa fa-cart-plus"></i>
+                    Sales
+                </li>
+                <li>
+                    <i class="fa fa-cart-plus"></i>
+                    Daily Accounts
+                </li>
+                <li>
+                    <i class="fa fa-cart-plus"></i>
+                    Weekly Accounts
+                </li>
+                <li>
+                    <i class="fa fa-cart-plus"></i>
+                    Monthly Accounts
+                </li>
+            </ul>
+        </li>
+        <li><i class="fa fa-filter"></i>Products</li>
+        <li><i class="fa fa-users"></i>Apprentice</li>
+        <li><i class="fa fa-eercast"></i>Collected Items</li>
+        <li><i class="fa fa-gear"></i>Settings</li>
+    </div>
+    <div class="logout">
+        <p (click)="logout()"><i class="fa fa-sign-out"></i> Logout</p>
+    </div>
+</div>

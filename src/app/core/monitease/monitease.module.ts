@@ -4,12 +4,14 @@ import { MonitEaseComponent } from './monitease.component';
 import { TopNavComponent } from 'src/app/layout/top-nav/top-nav.component';
 import { SideNavComponent } from 'src/app/layout/side-nav/side-nav.component';
 import { MonitEaseRoutingModule } from './monitease-routing.module';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     MonitEaseComponent,
     TopNavComponent,
-    SideNavComponent
+    SideNavComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
