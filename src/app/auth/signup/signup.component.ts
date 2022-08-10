@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IRegister } from 'src/app/core/models/auth.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { utilVariables } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +26,7 @@ export class SignupComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   })
 
-  isLoading: Boolean = false
+  isLoading: Boolean = utilVariables.isLoading
 
   get first_name() {
     return this.form.controls['first_name']

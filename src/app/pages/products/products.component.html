@@ -1,0 +1,49 @@
+<!-- <app-loader *ngIf="isLoading"></app-loader> -->
+
+<app-page-header [pageTitle]="title" [buttonLabel]="'Product'" [showAddButton]="true" (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
+
+<app-custom-table [displayColumns]="tableColumns" [displayRows]="datasource" [isLoading]="utils.isLoading"></app-custom-table>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Products</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="utils.modalRef.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="" [formGroup]="form">
+            <div class="form-group">
+                <label class="form-label">product Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Product Name"
+                    formControlName="name">
+                <div class="text-danger" *ngIf="name.invalid && (name.touched || name.dirty)">
+                    <small>Enter Product Name</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Product Quantity <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" placeholder="Enter Product Quantity" formControlName="quantity">
+                <div class="text-danger" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
+                    <small>Enter Product Quantity</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Restock Level <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" placeholder="Enter Restock Level"
+                    formControlName="restock">
+                <div class="text-danger" *ngIf="restock.invalid && (restock.touched || restock.dirty)">
+                    <small>Enter Restock Level</small>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn rounded-pill" [disabled]="form.invalid" (click)="submit(form.value)">
+            <!-- <span *ngIf="utils.isLoading" class="spinner-border spinner-border-sm pr-2" role="status"
+                aria-hidden="true"></span>&nbsp;--> Submit
+        </button>
+    </div>
+</ng-template>

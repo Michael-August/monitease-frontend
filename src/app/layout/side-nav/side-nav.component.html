@@ -4,31 +4,41 @@
     </div>
     <div class="link-items" id="link-items">
         <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-tachometer"></i>Dashboard</li>
-        <li class="nav-link collapsed" data-bs-target="#sales" data-bs-toggle="collapse">
-            <i class="fa fa-cart-plus"></i>
-            DailySales
-            <i class="fa fa-angle-right"></i>
-            <ul id="sales" class="nav-content collapse " data-bs-parent="#link-items">
-                <li>
-                    <i class="fa fa-cart-plus"></i>
-                    Sales
-                </li>
-                <li>
-                    <i class="fa fa-cart-plus"></i>
-                    Daily Accounts
-                </li>
-                <li>
-                    <i class="fa fa-cart-plus"></i>
-                    Weekly Accounts
-                </li>
-                <li>
-                    <i class="fa fa-cart-plus"></i>
-                    Monthly Accounts
-                </li>
-            </ul>
-        </li>
-        <li><i class="fa fa-filter"></i>Products</li>
-        <li><i class="fa fa-users"></i>Apprentice</li>
+        <a href="#sales" class="collapsed" data-toggle="collapse" data-parent="#sidebar"
+            aria-expanded="false">
+            <li routerLinkActive="active">
+                <i class="fa fa-cart-plus"></i>Daily Sales <i class="fa fa-angle-right"></i>
+            </li>
+        </a>
+        <div class="collapse" id="sales">
+            <a routerLink="/dailysales/sales" routerLinkActive="active" class="child" data-parent="#sales"><li><i class="fa fa-cart-plus"></i>Sales</li></a>
+            <a class="child" data-parent="#sales"><li><i class="fa fa-film"></i>Daily Accounts</li> </a>
+            <a class="child" data-parent="#sales"><li><i class="fa fa-star"></i>Weekly Accounts</li></a>
+            <a class="child" data-parent="#sales"><li><i class="fa fa-credit-card"></i>Monthly Accounts</li> </a>
+            <a class="child" data-parent="#sales"><li><i class="fa fa-book"></i>Account</li> </a>
+        </div>
+        <!-- <li class="nav-link collapsed" data-bs-target="#sales" data-bs-toggle="collapse" data-parent="#ide-bar">
+            <i class="fa fa-cart-plus"></i>DailySales<i class="fa fa-angle-right"></i></li>
+        <ul id="sales" class="nav-content collapse">
+            <li data-parent="#sales">
+                <i class="fa fa-cart-plus"></i>
+                Sales
+            </li>
+            <li>
+                <i class="fa fa-cart-plus"></i>
+                Daily Accounts
+            </li>
+            <li>
+                <i class="fa fa-cart-plus"></i>
+                Weekly Accounts
+            </li>
+            <li>
+                <i class="fa fa-cart-plus"></i>
+                Monthly Accounts
+            </li>
+        </ul> -->
+        <li routerLink="/products" routerLinkActive="active"><i class="fa fa-filter"></i>Products</li>
+        <li routerLink="/employees" routerLinkActive="active"><i class="fa fa-users"></i>Employees</li>
         <li><i class="fa fa-eercast"></i>Collected Items</li>
         <li><i class="fa fa-gear"></i>Settings</li>
     </div>

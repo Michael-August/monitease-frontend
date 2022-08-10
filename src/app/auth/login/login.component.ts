@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ILogin } from 'src/app/core/models/auth.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { SWEET_ALERT, validateAllFormFields } from 'src/app/shared/utils';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { SWEET_ALERT, utilVariables, validateAllFormFields } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   })
 
-  isLoading: Boolean = false
+  isLoading = utilVariables.isLoading
 
   ngOnInit(): void {
   }
@@ -43,11 +43,6 @@ export class LoginComponent implements OnInit {
       return validateAllFormFields(this.form);
     }
     this.auth.login(payload).subscribe((res: any) => {  
-      if (res.error) {
-        SWEET_ALERT('Failed', `${res.error}`, 'error', 'error', 'OK', false, false, undefined)
-        this.router.navigate(['/login'])
-      }
-
       if (res.success) {
         localStorage.setItem('Token', res.token)
         let user = JSON.stringify(res.user)
@@ -55,6 +50,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard'])
         SWEET_ALERT('Successful', 'Logged in successfully', 'success', 'success', 'OK', false, false, undefined)
       } 
+    }, err => {      
+      if (err) {
+        SWEET_ALERT('Failed', `${err.error.error}`, 'error', 'error', 'OK', false, false, undefined)
+        this.router.navigate(['/login'])
+      }
     }).add(() => this.isLoading = false)
   }
 

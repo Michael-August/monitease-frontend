@@ -1,0 +1,67 @@
+<div class="custom_table_container">
+    <div class="row">
+        <div class="col-3 form-group mt-2">
+            <input type="text" class="form-control" placeholder="filter">
+        </div>
+    </div>
+    <hr>
+    <div class="table-responsive table__wrapper">
+        <div class="loader__div" *ngIf="isLoading">
+            <div class="text-center">
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let headerCol of displayColumns">{{headerCol.value}}</th>
+                    <ng-container *ngIf="asActionCol && !isLoading">
+                        <th>Action</th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of displayRows; let i = index">
+                    <tr>
+                        <ng-container *ngFor="let headerCol of displayColumns">
+                            <td>{{data[headerCol.key]}}</td>
+                        </ng-container>
+                        <ng-container *ngIf="asActionCol && !isLoading">
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Update"
+                                    (click)="emitSingleAction('EDIT', data)" *ngIf="tableActionOption.hasEdit">
+                                    <i class="bx bx-edit-alt"></i> Edit
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" tooltip="View"
+                                    (click)="emitSingleAction('VIEW', data)" *ngIf="tableActionOption.hasView">
+                                    <i class="bi bi-view-list"></i> View
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" tooltip="Delete"
+                                    (click)="emitSingleAction('DELETE', data)" *ngIf="tableActionOption.hasDelete">
+                                    <i class="bx bx-trash"></i> Delete
+                                </button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!displayRows?.length">
+                    <tr>
+                        <td colspan="10" class="text-center">
+                            <span *ngIf="!isLoading">No Record Found</span>
+                            <span *ngIf="isLoading">Please wait...</span>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        
+    </div>
+</div>
+
+<!-- <div class="pagination-container">
+    <mat-paginator [length]="displayRows?.length" [pageSizeOptions]="pageNumber" [pageSize]="10"
+                showFirstLastButtons (page)="onPaginateChange($event)" [hidden]="isLoading"></mat-paginator>
+</div> -->

@@ -11,6 +11,7 @@
     --logo-font-family: Space Grotesk;
 
     --font-size: 20px;
+    
 }
 
 h1, h2, h3, h4, p, a {
@@ -27,4 +28,51 @@ body {
     font-family: var(--main-font-family);
     width: 100%;
 }
+
+/* Light Backgrounds */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0%;
+}
+
+.bg-primary-light {
+    background-color: #cfe2ff;
+    border-color: #cfe2ff;
+}
+
+.bg-secondary-light {
+    background-color: #e2e3e5;
+    border-color: #e2e3e5;
+}
+
+.bg-success-light {
+    background-color: #d1e7dd;
+    border-color: #d1e7dd;
+}
+
+.bg-danger-light {
+    background-color: #f8d7da;
+    border-color: #f8d7da;
+}
+
+.bg-warning-light {
+    background-color: #fff3cd;
+    border-color: #fff3cd;
+}
+
+.bg-info-light {
+    background-color: #cff4fc;
+    border-color: #cff4fc;
+}
+
+.bg-dark-light {
+    background-color: #d3d3d4;
+    border-color: #d3d3d4;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+}
+
 html, body { height: 100%; }

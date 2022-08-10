@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OthersService } from 'src/app/shared/services/others/others.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private otherSrv: OthersService) { }
+
+  noOfProducts: number | undefined
 
   ngOnInit(): void {
+    this.otherSrv.product$.subscribe(res => this.noOfProducts = res.length)
   }
+  
 
 }

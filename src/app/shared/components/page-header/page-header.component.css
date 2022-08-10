@@ -1,0 +1,25 @@
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.button_container {
+    display: flex;
+    justify-content: space-between
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+}
+
+h3 {
+    border-left: 1px solid #d1d2d4;
+    color: rgb(19, 4, 4);
+    font-size: 24px;
+    margin-bottom: 0;
+    font-weight: 600;
+    /* margin-left: 10px */
+}

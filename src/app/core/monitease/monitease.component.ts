@@ -25,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
         margin-top: 100px;
     }
 
-    @media (max-width: 769px) {
+    @media (max-width: 820px) {
         .body {
             width: 100%;
             margin-left: 0px;

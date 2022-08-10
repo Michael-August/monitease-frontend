@@ -37,3 +37,7 @@ export const validateAllFormFields = (formGroup: FormGroup) => {         // {1}
         }
     });
 };
+
+export const utilVariables = {
+    isLoading: false
+}
