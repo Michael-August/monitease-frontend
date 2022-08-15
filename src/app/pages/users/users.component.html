@@ -1,0 +1,104 @@
+<app-page-header [pageTitle]="title" [buttonLabel]="'User'" [showAddButton]="true"
+    (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
+
+
+<app-custom-table [displayColumns]="tableColumns" [displayRows]="datasource" [isLoading]="utils.isLoading">
+</app-custom-table>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Products</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="utils.modalRef.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="" [formGroup]="form">
+            <div class="form-group">
+                <label class="form-label">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name">
+                <div class="text-danger" *ngIf="first_name.invalid && (first_name.touched || first_name.dirty)">
+                    <small>Enter First Name</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Last Name"
+                    formControlName="last_name">
+                <div class="text-danger" *ngIf="last_name.invalid && (last_name.touched || last_name.dirty)">
+                    <small>Enter Last Name</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Username <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Username" formControlName="username">
+                <div class="text-danger" *ngIf="username.invalid && (username.touched || username.dirty)">
+                    <small>Enter Username</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" placeholder="Enter Password" formControlName="password">
+                <div class="text-danger" *ngIf="password.invalid && (password.touched || password.dirty)">
+                    <small>Enter Password</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Phone Number" formControlName="phone_number">
+                <div class="text-danger" *ngIf="phone_number.invalid && (phone_number.touched || phone_number.dirty)">
+                    <small>Enter Phone Number</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">email <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter email" formControlName="email">
+                <div class="text-danger" *ngIf="email.invalid && (email.touched || email.dirty)">
+                    <small>Enter email</small>
+                </div>
+            </div>
+
+            <!-- <div class="form-group">
+                <label class="form-label">Role <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Role" formControlName="role">
+                <div class="text-danger" *ngIf="role.invalid && (role.touched || role.dirty)">
+                    <small>Enter Role</small>
+                </div>
+            </div> -->
+
+            <div class="form-group">
+                <label class="form-label">Role <span class="text-danger">*</span></label>
+                <select class="form-control" name="" id="" formControlName="role" (change)="changeRole($event)">
+                    <option value="">--select role--</option>
+                    <option value="OTHERS">others</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="DIRECTOR">Director</option>
+                    <option value="SECRATARY">Secretary</option>
+                </select>
+                <div class="text-danger" *ngIf="role.invalid && (role.touched || role.dirty)">
+                    <small>select a Role</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Is Verified</label>
+                <input type="checkbox" class="ml-3" placeholder="Enter Restock Level" formControlName="is_verified">
+                <!-- <div class="text-danger" *ngIf="is_verified.invalid && (is_verified.touched || is_verified.dirty)">
+                    <small>Enter Restock Level</small>
+                </div> -->
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn rounded-pill" [disabled]="form.invalid" (click)="submit()">
+            <!-- <span *ngIf="utils.isLoading" class="spinner-border spinner-border-sm pr-2" role="status"
+                aria-hidden="true"></span>&nbsp;--> Submit
+        </button>
+    </div>
+</ng-template>

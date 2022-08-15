@@ -11,10 +11,12 @@ export class CustomTableComponent implements OnInit {
   @Input() displayColumns: Array<{ key: string, value: string }> = []
   @Input() asActionCol = true;
   @Input() isLoading: boolean = false
+  @Input() isView: boolean = true
   // @Input() itemsPerPage: number;
   // @Input() tableAction: TableAction;
 
   @Output() feedback: EventEmitter<any> = new EventEmitter<any>();
+  @Output() filterBy: EventEmitter<any> = new EventEmitter<any>()
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
@@ -28,7 +30,7 @@ export class CustomTableComponent implements OnInit {
   tableActionOption: TableAction = {
     hasEdit: true,
     hasDelete: true,
-    hasView: false
+    hasView: this.isView
   };
 
   constructor() {
@@ -61,9 +63,7 @@ export class CustomTableComponent implements OnInit {
   // }
 
   applyFilter(filterValue: string): void {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    // this.dataSource.filter = filterValue;
+    this.filterBy.emit(filterValue)
   }
 
   emitSingleAction(action: string, data: any): void {

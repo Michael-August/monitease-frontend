@@ -10,6 +10,8 @@ import { SideNavComponent } from 'src/app/layout/side-nav/side-nav.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { EmployeesComponent } from 'src/app/pages/employees/employees.component';
+import { UsersComponent } from 'src/app/pages/users/users.component';
+import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { EmployeesComponent } from 'src/app/pages/employees/employees.component'
     SideNavComponent,
     DashboardComponent,
     ProductsComponent,
+    ProductDetailsComponent,
     EmployeesComponent,
+    UsersComponent,
   ],
   imports: [
     CommonModule,

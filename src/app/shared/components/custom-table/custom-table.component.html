@@ -1,7 +1,7 @@
 <div class="custom_table_container">
     <div class="row">
         <div class="col-3 form-group mt-2">
-            <input type="text" class="form-control" placeholder="filter">
+            <input #filterBy (keyup)="applyFilter(filterBy.value)" type="text" class="form-control" placeholder="filter">
         </div>
     </div>
     <hr>
@@ -32,15 +32,15 @@
                             <td>
                                 <button type="button" class="btn btn-secondary btn-sm" tooltip="Update"
                                     (click)="emitSingleAction('EDIT', data)" *ngIf="tableActionOption.hasEdit">
-                                    <i class="bx bx-edit-alt"></i> Edit
+                                    <i class="fa fa-pencil"></i> Edit
                                 </button>
-                                <button type="button" class="btn btn-primary btn-sm" tooltip="View"
+                                <button type="button" class="btn btn-secondary btn-sm" tooltip="View"
                                     (click)="emitSingleAction('VIEW', data)" *ngIf="tableActionOption.hasView">
                                     <i class="bi bi-view-list"></i> View
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm" tooltip="Delete"
                                     (click)="emitSingleAction('DELETE', data)" *ngIf="tableActionOption.hasDelete">
-                                    <i class="bx bx-trash"></i> Delete
+                                    <i class="fa fa-trash"></i> Delete
                                 </button>
                             </td>
                         </ng-container>

@@ -13,6 +13,9 @@ export class UtilsService {
 
     objectId: number = 0
 
+    numberOfProducts: number = 0
+    numberOfSales: number = 0
+
     constructor(private location: Location, private modalService: BsModalService, private datePipe: DatePipe) {
     }
 

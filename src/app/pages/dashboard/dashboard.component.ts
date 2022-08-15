@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OthersService } from 'src/app/shared/services/others/others.service';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +9,18 @@ import { OthersService } from 'src/app/shared/services/others/others.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private otherSrv: OthersService) { }
+  constructor(private utils: UtilsService, private router: Router) { }
 
   noOfProducts: number | undefined
+  noOfSales: number | undefined
 
   ngOnInit(): void {
-    this.otherSrv.product$.subscribe(res => this.noOfProducts = res.length)
+    this.noOfProducts = this.utils.numberOfProducts
+    this.noOfSales = this.utils.numberOfSales
   }
   
+  allproducts() {
+    this.router.navigate(['/products'])
+  }
 
 }

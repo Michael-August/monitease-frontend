@@ -1,1 +1,12 @@
-<p>sales works!</p>
+<app-loader *ngIf="utils.isLoading"></app-loader>
+
+<app-page-header [pageTitle]="title" [buttonLabel]="'Sales'" [showAddButton]="true"
+    (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
+
+<app-custom-table [displayColumns]="tableColumns" (feedback)="tableAction($event, template)" [displayRows]="datasource"
+    [isView]="view" [isLoading]="utils.isLoading"></app-custom-table>
+
+
+<ng-template #template>
+
+</ng-template>
