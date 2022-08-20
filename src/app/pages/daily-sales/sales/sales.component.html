@@ -3,10 +3,223 @@
 <app-page-header [pageTitle]="title" [buttonLabel]="'Sales'" [showAddButton]="true"
     (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
 
-<app-custom-table [displayColumns]="tableColumns" (feedback)="tableAction($event, template)" [displayRows]="datasource"
-    [isView]="view" [isLoading]="utils.isLoading"></app-custom-table>
+<div class="filter mb-3">
+    <h4 class="mb-3 head">Filter Sales</h4>
+    <form action="" [formGroup]="filterForm" (ngSubmit)="filter()" class="mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="form-label">Customer Name</label>
+                <input type="text" class="form-control" placeholder="Enter Customer Name" formControlName="customername">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="form-label">Item Sold</label>
+                <select name="" id="" (change)="changeItemsold($event)" class="form-control" formControlName="itemsold">
+                    <option value="">--select product sold</option>
+                    <option value="{{product.id}}" *ngFor="let product of products">{{product.item_name}}</option>
+                </select>
+            </div>
+            
+            <div class="form-group col-md-4 mt-4">
+                <label class="form-label">Have Paid? </label>
+                <input type="checkbox" class="ml-3" placeholder="Enter Customer Name" formControlName="havePaid">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="form-label">Date sold (start date)</label>
+                <input type="date" class="form-control" placeholder="Enter Customer Name" formControlName="startDateSold">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="form-label">Date sold (End date)</label>
+                <input type="date" class="form-control" placeholder="Enter Customer Name" formControlName="endDateSold">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="form-label">Date Paid (Start date)</label>
+                <input type="date" class="form-control" placeholder="Enter Customer Name" formControlName="startDatePaid">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="form-label">Date Paid (End date)</label>
+                <input type="date" class="form-control" placeholder="Enter Customer Name" formControlName="endDatePaid">
+            </div>
+        </div>
+        <button class="btn rounded-pill">
+            <span class=""
+                aria-hidden="true"></span>&nbsp; Submit
+        </button>
+    </form>
+</div>
 
+<div class="custom_table_container">
+    <div class="row">
+        <div class="col-3 form-group mt-2">
+            <input #filterBy (keyup)="search(filterBy.value)" type="text" class="form-control"
+                placeholder="search">
+        </div>
+    </div>
+    <hr>
+    <div class="table-responsive table__wrapper">
+        <div class="loader__div" *ngIf="utils.isLoading">
+            <div class="text-center">
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let headerCol of tableColumns">{{headerCol.value}}</th>
+                    <ng-container *ngIf="!utils.isLoading">
+                        <th>Action</th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of datasource; let i = index">
+                    <tr>
+                        <td>{{data['customername']}}</td>
+                        <td>{{data['quantity']}}</td>
+                        <td>{{data['rate']}}</td>
+                        <td>{{data['totalprice']}}</td>
+                        <td>{{data['itemsold']}}</td>
+                        <td *ngIf="!data['havepaid']"><i (click)="togglePaid(data, paid)" class="fa fa-toggle-off fa-2x"></i></td>
+                        <td *ngIf="data['havepaid']"><i (click)="togglePaid(data, paid)" class="fa fa-toggle-on text-success fa-2x"></i></td>
+                        <td>{{data['datesold']}}</td>
+                        <td>{{data['dateupdated']}}</td>
+                        <td>{{data['datepaid']}}</td>
+                        
+                        <ng-container *ngIf="!utils.isLoading">
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Update"
+                                    (click)="tableAction('EDIT', data)" (click)="utils.triggerModal(template, ['modal-body', 'modal-dialog-centered'])">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </button>
+                                <!-- <button type="button" class="btn btn-secondary btn-sm" tooltip="View"
+                                    (click)="tableAction('VIEW', data)">
+                                    <i class="bi bi-view-list"></i> View
+                                </button> -->
+                                <button type="button" class="btn btn-danger btn-sm" tooltip="Delete"
+                                    (click)="tableAction('DELETE', data)">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!datasource?.length">
+                    <tr>
+                        <td colspan="10" class="text-center">
+                            <span *ngIf="!utils.isLoading">No Record Found</span>
+                            <span *ngIf="utils.isLoading">Please wait...</span>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #paid>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Sales</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()"
+            (click)="utils.modalRef.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="" [formGroup]="paidForm">
+            <div class="form-group">
+                <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+                <select name="" id="" (change)="changepaidpaymentmethod($event)" class="form-control" formControlName="paymentmethod">
+                    <option value="">--select payment method</option>
+                    <option value="cash">Cash</option>
+                    <option value="transfer">Transfer</option>
+                </select>
+                <div class="text-danger" *ngIf="paidpaymentmethod.invalid && (paidpaymentmethod.touched || paidpaymentmethod.dirty)">
+                    <small>Enter Payment Method</small>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn rounded-pill" [disabled]="paidForm.invalid" (click)="changepaid()">
+            <span *ngIf="utils.isLoading" class="fa fa-circle-o-notch fa-spin spinner-border-sm pr-2" role="status"
+                aria-hidden="true"></span>&nbsp; Submit
+        </button>
+    </div>
+</ng-template>
 
 <ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Sales</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()" (click)="utils.modalRef.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="" [formGroup]="form">
+            <div class="form-group">
+                <label class="form-label">Customer Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Customer Name" formControlName="customername">
+                <div class="text-danger" *ngIf="customername.invalid && (customername.touched || customername.dirty)">
+                    <small>Enter Customer Name</small>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" placeholder="Enter Product Quantity" formControlName="quantity">
+                <div class="text-danger" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
+                    <small>Quantity</small>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label class="form-label">Rate <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" placeholder="Enter Rate" formControlName="rate">
+                <div class="text-danger" *ngIf="rate.invalid && (rate.touched || rate.dirty)">
+                    <small>Enter Rate</small>
+                </div>
+            </div>
 
+            <div class="form-group">
+                <label class="form-label">Item Sold <span class="text-danger">*</span></label>
+                <select name="" id="" (change)="changeItemsold($event)" class="form-control" formControlName="itemsold">
+                    <option value="">--select product sold</option>
+                    <option value="{{product.id}}" *ngFor="let product of products">{{product.item_name}}</option>
+                </select>
+                <div class="text-danger" *ngIf="itemsold.invalid && (itemsold.touched || itemsold.dirty)">
+                    <small>Enter Item Sold</small>
+                </div>
+            </div>
+
+            <div class="form-group" [hidden]="!havepaid.value">
+                <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+                <select name="" id="" (change)="changePaymentMethod($event)" class="form-control" formControlName="paymentmethod">
+                    <option value="">--select payment method</option>
+                    <option value="cash">Cash</option>
+                    <option value="transfer">Transfer</option>
+                </select>
+                <div class="text-danger" *ngIf="paymentmethod.invalid && (paymentmethod.touched || paymentmethod.dirty)">
+                    <small>Enter Payment Method</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Customer have paid <span class="text-danger">*</span></label>
+                <input type="checkbox" class="ml-3" formControlName="havepaid">
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn rounded-pill" [disabled]="form.invalid" (click)="submit()">
+            <span *ngIf="utils.isLoading" class="fa fa-circle-o-notch fa-spin spinner-border-sm pr-2" role="status"
+                    aria-hidden="true"></span>&nbsp; Submit
+        </button>
+    </div>
 </ng-template>
