@@ -17,7 +17,8 @@ export class ProductDetailsComponent implements OnInit {
     id: 0,
     item_name: '',
     quantity: 0,
-    restocklevel: 0
+    restocklevel: 0,
+    percent: 0
   }
 
   ngOnInit(): void {

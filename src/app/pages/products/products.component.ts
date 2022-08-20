@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
 import { OthersService } from 'src/app/shared/services/others/others.service';
@@ -21,9 +21,9 @@ export class ProductsComponent implements OnInit {
   view: boolean = false
 
   form = new FormGroup({
-    item_name: new FormControl(''),
-    quantity: new FormControl(''),
-    restocklevel: new FormControl('')
+    item_name: new FormControl('', [Validators.required]),
+    quantity: new FormControl('', [Validators.required]),
+    restocklevel: new FormControl('', [Validators.required])
   })
 
   tableColumns = [
@@ -55,11 +55,14 @@ export class ProductsComponent implements OnInit {
     this.utils.isLoading = true
     this.allSrv.getProducts().subscribe((res: any) => {
       this.datasource = res      
-      this.utils.numberOfProducts = res.length
     }).add(() => this.utils.isLoading = false)
   }
 
-  filtered(event: any) {
+  closeModal() {
+    this.form.reset()
+  }
+
+  search(event: any) {
     console.log(event)
     this.allSrv.getProducts().subscribe((res: any) => {
       this.datasource = res.filter((data: any) => data.contains(event))
@@ -76,6 +79,7 @@ export class ProductsComponent implements OnInit {
         console.log(res);
         this.utils.modalRef.hide()
         SWEET_ALERT('Successful', `Product ${this.name.value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        this.form.reset()
         this.getProducts()
       }, err => {
         console.log(err);
@@ -91,6 +95,7 @@ export class ProductsComponent implements OnInit {
         console.log(res);
         this.utils.modalRef.hide()
         SWEET_ALERT('Successful', `Product ${this.name.value} Updated successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        this.form.reset()
         this.getProducts()
       }, err => {
         console.log(err);

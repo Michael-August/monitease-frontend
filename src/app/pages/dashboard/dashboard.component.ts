@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { IProduct } from '../products/products.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,14 +11,22 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private utils: UtilsService, private router: Router) { }
+  constructor(private allSrv: OthersService, private router: Router) { }
 
   noOfProducts: number | undefined
   noOfSales: number | undefined
+  products: Array<IProduct> = []
+  default: Number = 50
 
   ngOnInit(): void {
-    this.noOfProducts = this.utils.numberOfProducts
-    this.noOfSales = this.utils.numberOfSales
+    this.allSrv.getProducts().subscribe((res: any) => {
+      this.noOfProducts = res.length
+      this.products = res
+    })
+
+    this.allSrv.getSales().subscribe((res: any) => {
+      this.noOfSales = res.results.length
+    })
   }
   
   allproducts() {

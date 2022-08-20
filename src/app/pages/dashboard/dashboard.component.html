@@ -62,51 +62,16 @@
                     <h4>Products</h4>
                     <p (click)="allproducts()">view all</p>
                 </div>
-                <div class="percentage mb-3">
+                <div class="percentage mb-3" *ngFor="let product of products">
                     <div class="title">
-                        <p class="product name">1TB HDD</p>
-                        <p>40%</p>
+                        <p class="product name">{{product.item_name}}</p>
+                        <p>{{product.percent}}%</p>
                     </div>
-                    <div class="percent-level bg-danger-light">
-                        <div class="actual-level bg-danger"></div>
+                    <div class="percent-level" [ngClass]="product.percent >= 50 ? 'bg-success-light' : (product.percent <= 49 && product.percent >= 45 ? 'bg-warning-light' : 'bg-danger-light')">
+                        <div class="actual-level" [ngStyle]="{'width': product.percent}" [ngClass]="product.percent >= 50 ? 'bg-success' : (product.percent <= 49 && product.percent>= 45 ? 'bg-warning' : 'bg-danger')"></div>
                     </div>
                 </div>
-                <div class="percentage mb-3">
-                    <div class="title">
-                        <p class="product name">1TB HDD</p>
-                        <p>40%</p>
-                    </div>
-                    <div class="percent-level bg-danger-light">
-                        <div class="actual-level bg-danger"></div>
-                    </div>
-                </div>
-                <div class="percentage mb-3">
-                    <div class="title">
-                        <p class="product name">1TB HDD</p>
-                        <p>40%</p>
-                    </div>
-                    <div class="percent-level bg-danger-light">
-                        <div class="actual-level bg-danger"></div>
-                    </div>
-                </div>
-                <div class="percentage mb-3">
-                    <div class="title">
-                        <p class="product name">1TB HDD</p>
-                        <p>40%</p>
-                    </div>
-                    <div class="percent-level bg-danger-light">
-                        <div class="actual-level bg-danger"></div>
-                    </div>
-                </div>
-                <div class="percentage mb-3">
-                    <div class="title">
-                        <p class="product name">1TB HDD</p>
-                        <p>40%</p>
-                    </div>
-                    <div class="percent-level bg-danger-light">
-                        <div class="actual-level bg-danger"></div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

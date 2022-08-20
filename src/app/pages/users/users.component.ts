@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit {
     this.role.setValue(e.target.value, {
       onlySelf: true,
     });
+    
   }
 
   submit() {

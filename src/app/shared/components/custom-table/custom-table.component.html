@@ -1,7 +1,7 @@
 <div class="custom_table_container">
     <div class="row">
         <div class="col-3 form-group mt-2">
-            <input #filterBy (keyup)="applyFilter(filterBy.value)" type="text" class="form-control" placeholder="filter">
+            <input #filterBy (keyup)="applyFilter(filterBy.value)" type="text" class="form-control" placeholder="search">
         </div>
     </div>
     <hr>
@@ -28,6 +28,9 @@
                         <ng-container *ngFor="let headerCol of displayColumns">
                             <td>{{data[headerCol.key]}}</td>
                         </ng-container>
+                        <!-- <ng-container>
+                            <td><i class="fa fa-toggle-off fa-2x"></i></td>
+                        </ng-container> -->
                         <ng-container *ngIf="asActionCol && !isLoading">
                             <td>
                                 <button type="button" class="btn btn-secondary btn-sm" tooltip="Update"
