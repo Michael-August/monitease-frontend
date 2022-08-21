@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -8,14 +9,13 @@ import { Router } from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private authSrv: AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout(){
-    localStorage.clear()
-    this.router.navigate(['/login'])
+    this.authSrv.logout()
   }
 
 }

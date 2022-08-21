@@ -4,16 +4,16 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ISales } from '../sales.model';
 
 @Component({
-  selector: 'app-daily-account',
-  templateUrl: './daily-account.component.html',
-  styleUrls: ['./daily-account.component.css']
+  selector: 'app-monthly-account',
+  templateUrl: './monthly-account.component.html',
+  styleUrls: ['./monthly-account.component.css']
 })
-export class DailyAccountComponent implements OnInit {
+export class MonthlyAccountComponent implements OnInit {
 
   constructor(public utils: UtilsService, private allSrv: OthersService) { }
 
-  title = 'Daily Account'
-  
+  title = 'Monthly Account'
+
   tableColumns = [
     { key: 'customername', value: 'Customer' },
     { key: 'quantity', value: 'Quantity' },
@@ -28,16 +28,16 @@ export class DailyAccountComponent implements OnInit {
   datasource: Array<ISales> = []
 
   ngOnInit(): void {
-    this.getDailyAccount()
+    this.getMonthlyAccount()
   }
 
   search(event: any) {
 
   }
 
-  getDailyAccount() {
+  getMonthlyAccount() {
     this.utils.isLoading = true
-    this.allSrv.getDailyAccount().subscribe((res: any) => {
+    this.allSrv.getMonthlyAccount().subscribe((res: any) => {
       this.datasource = res.data
     }).add(() => this.utils.isLoading = false)
   }

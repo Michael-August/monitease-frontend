@@ -7,4 +7,6 @@ export interface ISales {
     havepaid: boolean
     totalprice: number,
     paymentmethod: string
+    datesold: string
+    datepaid: string
 }

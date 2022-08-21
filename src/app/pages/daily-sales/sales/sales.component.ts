@@ -20,6 +20,7 @@ export class SalesComponent implements OnInit {
   title: string = 'Sales'
   view: boolean = true
   isNew: boolean = true
+  hideForm = true
 
   paidData: any = {}
 
@@ -92,6 +93,10 @@ export class SalesComponent implements OnInit {
   ngOnInit(): void {
     this.getSales()
     this.getProducts()
+  }
+
+  expandForm() {
+    this.hideForm = !this.hideForm
   }
 
   changeItemsold(event: any) {

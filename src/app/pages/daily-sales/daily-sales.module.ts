@@ -4,13 +4,19 @@ import { SalesComponent } from './sales/sales.component';
 import { DailySalesRouteModule } from './daily-sales.routing';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DailyAccountComponent } from './daily-account/daily-account.component';
+import { WeeklyAccountComponent } from './weekly-account/weekly-account.component';
+import { MonthlyAccountComponent } from './monthly-account/monthly-account.component';
+import { FilterableAccountComponent } from './filterable-account/filterable-account.component';
 
 
 
 @NgModule({
   declarations: [
     SalesComponent,
-    DailyAccountComponent
+    DailyAccountComponent,
+    WeeklyAccountComponent,
+    MonthlyAccountComponent,
+    FilterableAccountComponent
   ],
   imports: [
     CommonModule,

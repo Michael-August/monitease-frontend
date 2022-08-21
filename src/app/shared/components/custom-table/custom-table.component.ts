@@ -12,6 +12,7 @@ export class CustomTableComponent implements OnInit {
   @Input() asActionCol = true;
   @Input() isLoading: boolean = false
   @Input() isView: boolean = true
+  @Input() export: boolean = false
   // @Input() itemsPerPage: number;
   // @Input() tableAction: TableAction;
 

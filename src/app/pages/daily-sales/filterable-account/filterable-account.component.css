@@ -37,10 +37,6 @@ td>.btn {
     margin-right: 5px
 }
 
-form {
-    transition: all 0.3s ease-in-out;
-}
-
 .filter {
     border: 1px solid var(--primary-color);
     border-radius: 4px;

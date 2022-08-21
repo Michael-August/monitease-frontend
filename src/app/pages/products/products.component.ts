@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
     { key: 'item_name', value: 'Name' },
     { key: 'quantity', value: 'Quantity' },
     { key: 'restocklevel', value: 'Restock Level' },
+    { key: 'total_added', value: 'Total Added' },
     { key: 'dateadded', value: 'Date created' }
   ]
 
@@ -74,6 +75,7 @@ export class ProductsComponent implements OnInit {
   submit() {
     this.utils.isLoading = true
     const payload: IProduct = this.form.value
+    // payload['total_added'] = this.quantity.value
     if (this.isNew) {
       this.allSrv.postProduct(payload).subscribe(res => {
         console.log(res);

@@ -53,7 +53,6 @@ export class OthersService {
   }
 
   // Sales
-
   getSales() {
     return this.http.get(`${this.base_url}/DailySales`)
   }
@@ -76,6 +75,27 @@ export class OthersService {
 
   deleteSales(id: number) {
     return this.http.delete(`${this.base_url}/DailySales/${id}`)
+  }
+
+  // Accounts
+  getDailyAccount() {
+    return this.http.get(`${this.base_url}/DailySales/report`)
+  }
+
+  getWeeklyAccount() {
+    return this.http.get(`${this.base_url}/DailySales/weeklyReport`)
+  }
+
+  getMonthlyAccount() {
+    return this.http.get(`${this.base_url}/DailySales/monthlyReport`)
+  }
+
+  getAllAccount() {
+    return this.http.get(`${this.base_url}/DailySales/filteredReport`)
+  }
+
+  getFilteredAccount(obj: any) {
+    return this.http.get(`${this.base_url}/DailySales/filteredReport?datesold__gte=${obj.startDateSold}&datesold__lte=${obj.endDateSold}`)
   }
   
 }

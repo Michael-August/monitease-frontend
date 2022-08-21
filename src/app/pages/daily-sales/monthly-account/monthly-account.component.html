@@ -1,0 +1,6 @@
+<app-loader *ngIf="utils.isLoading"></app-loader>
+
+<app-page-header [pageTitle]="title" [showAddButton]="false"></app-page-header>
+
+<app-custom-table [displayColumns]="tableColumns" [export]="true" (filterBy)="search($event)" [asActionCol]="false"
+    [displayRows]="datasource" [isLoading]="utils.isLoading"></app-custom-table>

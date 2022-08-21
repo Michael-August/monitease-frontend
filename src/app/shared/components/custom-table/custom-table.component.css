@@ -32,3 +32,21 @@ tr>td {
 td>.btn {
     margin-right: 5px
 }
+
+.th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    transition: all 0.4s ease-in-out;
+    background-color: transparent;
+    color: black;
+    border: 2px solid var(--primary-color);
+}
+
+.button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}

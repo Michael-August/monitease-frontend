@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ISales } from '../sales.model';
 
 @Component({
-  selector: 'app-daily-account',
-  templateUrl: './daily-account.component.html',
-  styleUrls: ['./daily-account.component.css']
+  selector: 'app-filterable-account',
+  templateUrl: './filterable-account.component.html',
+  styleUrls: ['./filterable-account.component.css']
 })
-export class DailyAccountComponent implements OnInit {
+export class FilterableAccountComponent implements OnInit {
 
   constructor(public utils: UtilsService, private allSrv: OthersService) { }
 
-  title = 'Daily Account'
-  
+  title = 'General Account'
+
+  filterAccount = new FormGroup({
+    startDateSold: new FormControl(''),
+    endDateSold: new FormControl('')
+  })
+
   tableColumns = [
     { key: 'customername', value: 'Customer' },
     { key: 'quantity', value: 'Quantity' },
@@ -25,20 +31,30 @@ export class DailyAccountComponent implements OnInit {
     { key: 'datesold', value: 'Date Sold' },
     { key: 'datepaid', value: 'Date Paid' }
   ]
-  datasource: Array<ISales> = []
+  datasource: Array<any> = []
+  totals: any = {}
 
   ngOnInit(): void {
-    this.getDailyAccount()
+    this.getAccount()
   }
 
   search(event: any) {
 
   }
 
-  getDailyAccount() {
+  filtered() {
     this.utils.isLoading = true
-    this.allSrv.getDailyAccount().subscribe((res: any) => {
+    this.allSrv.getFilteredAccount(this.filterAccount.value).subscribe((res: any) => {
       this.datasource = res.data
+      this.totals = res
+    }).add(() => this.utils.isLoading = false)
+  }
+
+  getAccount() {
+    this.utils.isLoading = true
+    this.allSrv.getAllAccount().subscribe((res: any) => {
+      this.datasource = res.data
+      this.totals = res
     }).add(() => this.utils.isLoading = false)
   }
 

@@ -4,4 +4,5 @@ export interface IProduct {
     quantity: number
     restocklevel: number
     percent: number
+    total_added: number
 }

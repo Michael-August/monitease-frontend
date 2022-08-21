@@ -1,0 +1,136 @@
+<app-loader *ngIf="utils.isLoading"></app-loader>
+
+<app-page-header [pageTitle]="title" [showAddButton]="false"></app-page-header>
+
+<div class="filter mb-3">
+    <h4 class="mb-3 head">Filter Sales</h4>
+    <form action="" [formGroup]="filterAccount" (ngSubmit)="filtered()" class="mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="form-label">Date sold (start date)</label>
+                <input type="date" class="form-control" formControlName="startDateSold">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="form-label">Date sold (End date)</label>
+                <input type="date" class="form-control" formControlName="endDateSold">
+            </div>
+        </div>
+
+        <button class="btn rounded-pill">
+            <span class="" aria-hidden="true"></span>&nbsp; Submit
+        </button>
+    </form>
+</div>
+
+<div class="custom_table_container">
+    <div class="row">
+        <div class="col-3 form-group mt-2">
+            <input #filterBy (keyup)="search(filterBy.value)" type="text" class="form-control" placeholder="search">
+        </div>
+        <div class="col-3 th form-group mt-2">
+        </div>
+        <div class="col-3 th form-group mt-2">
+        </div>
+        <div class="col-3 th form-group mt-2">
+            <button class="button btn">Export to PDF</button>
+        </div>
+    </div>
+    <hr>
+    <div class="table-responsive table__wrapper">
+        <div class="loader__div" *ngIf="utils.isLoading">
+            <div class="text-center">
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let headerCol of tableColumns">{{headerCol.value}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of datasource; let i = index">
+                    <tr>
+                        <td>{{data['customername']}}</td>
+                        <td>{{data['quantity']}}</td>
+                        <td>{{data['rate']}}</td>
+                        <td>{{data['totalprice']}}</td>
+                        <td>{{data['itemsold']}}</td>
+                        <td>{{data['paymentmethod']}}</td>
+                        <td>{{data['havepaid']}}</td>
+                        <td>{{data['datesold']}}</td>
+                        <td>{{data['datepaid']}}</td>
+                    </tr>
+                </ng-container>
+                <ng-container>
+                    <tr>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                         <th></th>
+                        <th>{{totals.total | currency: 'NGN'}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Credit</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                         <th></th>
+                        <th>{{totals.credit_amount | currency: 'NGN'}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Cash</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{totals.total_cash | currency: 'NGN'}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Transfer</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{totals.total_transfer | currency: 'NGN'}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Paid</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                         <th></th>
+                        <th>{{totals.paid_total | currency: 'NGN'}}</th>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!datasource?.length">
+                    <tr>
+                        <td colspan="10" class="text-center">
+                            <span *ngIf="!utils.isLoading">No Record Found</span>
+                            <span *ngIf="utils.isLoading">Please wait...</span>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
