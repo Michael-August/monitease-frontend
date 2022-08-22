@@ -4,7 +4,7 @@
     (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
 
 <div class="filter mb-3">
-    <h4 class="mb-3 head" (click)="expandForm()">Filter Sales</h4>
+    <h4 class="head" style="margin-bottom: -1px" (click)="expandForm()">Filter Sales</h4>
     <form action="" [formGroup]="filterForm" [hidden]="hideForm" (ngSubmit)="filter()" class="mb-3">
         <div class="row">
             <div class="form-group col-md-4">

@@ -13,8 +13,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private allSrv: OthersService, private router: Router) { }
 
-  noOfProducts: number | undefined
-  noOfSales: number | undefined
+  noOfProducts: number = 0
+  noOfSales: number = 0
+  noOfSalesToday: number = 0
   products: Array<IProduct> = []
   default: Number = 50
 
@@ -26,6 +27,10 @@ export class DashboardComponent implements OnInit {
 
     this.allSrv.getSales().subscribe((res: any) => {
       this.noOfSales = res.results.length
+    })
+
+    this.allSrv.getDailyAccount().subscribe((res: any) => {
+      this.noOfSales = res.data.length
     })
   }
   

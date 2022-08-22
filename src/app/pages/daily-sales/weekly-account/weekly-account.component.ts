@@ -26,6 +26,7 @@ export class WeeklyAccountComponent implements OnInit {
     { key: 'datepaid', value: 'Date Paid' }
   ]
   datasource: Array<ISales> = []
+  totals: any
 
   ngOnInit(): void {
     this.getWeeklyAccount()
@@ -39,6 +40,7 @@ export class WeeklyAccountComponent implements OnInit {
     this.utils.isLoading = true
     this.allSrv.getWeeklyAccount().subscribe((res: any) => {
       this.datasource = res.data
+      this.totals = res
     }).add(() => this.utils.isLoading = false)
   }
 

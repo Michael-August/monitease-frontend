@@ -5,12 +5,14 @@ import { BsPackageModule } from "./bs-package.module";
 import { CustomTableComponent } from "./components/custom-table/custom-table.component";
 import { LoaderComponent } from "./components/loader/loader.component";
 import { PageHeaderComponent } from "./components/page-header/page-header.component";
+import { AccountTableComponent } from './components/account-table/account-table.component';
 
 
 const sharedComponent = [
     PageHeaderComponent,
     CustomTableComponent,
-    LoaderComponent
+    LoaderComponent,
+    AccountTableComponent
 ]
 
 const sharedModules = [
@@ -21,7 +23,7 @@ const sharedModules = [
 
 @NgModule({
     declarations: [
-        ...sharedComponent
+        ...sharedComponent,
     ],
 
     imports: [

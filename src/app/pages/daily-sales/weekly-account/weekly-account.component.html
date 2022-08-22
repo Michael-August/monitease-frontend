@@ -2,5 +2,4 @@
 
 <app-page-header [pageTitle]="title" [showAddButton]="false"></app-page-header>
 
-<app-custom-table [displayColumns]="tableColumns" [export]="true" (filterBy)="search($event)" [asActionCol]="false"
-    [displayRows]="datasource" [isLoading]="utils.isLoading"></app-custom-table>
+<app-account-table [displayRows]="datasource" [displayColumns]="tableColumns" [res]="totals"></app-account-table>

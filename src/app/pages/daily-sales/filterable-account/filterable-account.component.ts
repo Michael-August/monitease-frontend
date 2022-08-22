@@ -14,6 +14,7 @@ export class FilterableAccountComponent implements OnInit {
   constructor(public utils: UtilsService, private allSrv: OthersService) { }
 
   title = 'General Account'
+  hideForm = true
 
   filterAccount = new FormGroup({
     startDateSold: new FormControl(''),
@@ -40,6 +41,10 @@ export class FilterableAccountComponent implements OnInit {
 
   search(event: any) {
 
+  }
+
+  expandForm() {
+    this.hideForm = !this.hideForm
   }
 
   filtered() {

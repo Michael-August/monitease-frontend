@@ -26,6 +26,7 @@ export class MonthlyAccountComponent implements OnInit {
     { key: 'datepaid', value: 'Date Paid' }
   ]
   datasource: Array<ISales> = []
+  totals: any
 
   ngOnInit(): void {
     this.getMonthlyAccount()
@@ -39,6 +40,7 @@ export class MonthlyAccountComponent implements OnInit {
     this.utils.isLoading = true
     this.allSrv.getMonthlyAccount().subscribe((res: any) => {
       this.datasource = res.data
+      this.totals = res
     }).add(() => this.utils.isLoading = false)
   }
 

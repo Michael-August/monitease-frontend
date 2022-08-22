@@ -26,6 +26,7 @@ export class DailyAccountComponent implements OnInit {
     { key: 'datepaid', value: 'Date Paid' }
   ]
   datasource: Array<ISales> = []
+  totals: any = {}
 
   ngOnInit(): void {
     this.getDailyAccount()
@@ -39,6 +40,7 @@ export class DailyAccountComponent implements OnInit {
     this.utils.isLoading = true
     this.allSrv.getDailyAccount().subscribe((res: any) => {
       this.datasource = res.data
+      this.totals = res
     }).add(() => this.utils.isLoading = false)
   }
 

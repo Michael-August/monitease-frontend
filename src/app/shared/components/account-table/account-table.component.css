@@ -37,23 +37,14 @@ td>.btn {
     margin-right: 5px
 }
 
-.filter {
-    border: 1px solid var(--primary-color);
-    border-radius: 4px;
+.button {
+    transition: all 0.4s ease-in-out;
+    background-color: transparent;
+    color: black;
+    border: 2px solid var(--primary-color);
 }
 
-.filter form {
-    padding: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.head {
-    padding: 10px;
-    background-color: rgb(231, 228, 228);
-    border: 1px solid var(--primary-color);
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-radius: 4px;
-    cursor: pointer;
+.button:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
