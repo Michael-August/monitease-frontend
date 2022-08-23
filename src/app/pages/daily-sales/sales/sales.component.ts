@@ -21,6 +21,8 @@ export class SalesComponent implements OnInit {
   view: boolean = true
   isNew: boolean = true
   hideForm = true
+  page = 1
+  response: any
 
   paidData: any = {}
 
@@ -113,6 +115,11 @@ export class SalesComponent implements OnInit {
     this.paidpaymentmethod.setValue(event.target.value)
   }
 
+  pageChanged(event: any) {
+    this.page = event
+    this.getSales()
+  }
+
   getProducts() {
     this.allSrv.getProducts().subscribe((res: any) => {
       this.products = res
@@ -126,8 +133,9 @@ export class SalesComponent implements OnInit {
 
   getSales() {
     this.utils.isLoading = true
-    this.allSrv.getSales().subscribe((res: any) => {
+    this.allSrv.getSales(this.page).subscribe((res: any) => {
       this.datasource = res.results
+      this.response = res
       console.log(res);
     }, err => {
       if (err.error['detail'] === "Expired Token, login") {

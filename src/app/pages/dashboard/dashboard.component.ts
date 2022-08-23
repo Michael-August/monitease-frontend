@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   noOfSalesToday: number = 0
   products: Array<IProduct> = []
   default: Number = 50
+  page = 1
 
   ngOnInit(): void {
     this.allSrv.getProducts().subscribe((res: any) => {
@@ -25,8 +26,8 @@ export class DashboardComponent implements OnInit {
       this.products = res
     })
 
-    this.allSrv.getSales().subscribe((res: any) => {
-      this.noOfSales = res.results.length
+    this.allSrv.getSales(this.page).subscribe((res: any) => {
+      this.noOfSales = res.count
     })
 
     this.allSrv.getDailyAccount().subscribe((res: any) => {

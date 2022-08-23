@@ -40,11 +40,22 @@ td>.btn {
 .filter {
     border: 1px solid var(--primary-color);
     border-radius: 4px;
+    transition: all 0.7s;
 }
 
 .filter form {
     padding: 10px;
-    transition: all 0.3s ease-in-out;
+    animation-duration: 0.7s;
+    animation-name: slideDown;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+}
+
+.backup {
+    animation-duration: 0.7s;
+    animation-name: slideUp;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
 }
 
 .head {
@@ -56,4 +67,28 @@ td>.btn {
     border-right: 0;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.pagination ::ng-deep .ngx-pagination .current {
+    background: var(--primary-color);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(5%);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(5%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
 }

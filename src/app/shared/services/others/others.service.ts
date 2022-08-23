@@ -53,8 +53,8 @@ export class OthersService {
   }
 
   // Sales
-  getSales() {
-    return this.http.get(`${this.base_url}/DailySales`)
+  getSales(page: any) {
+    return this.http.get(`${this.base_url}/DailySales?page=${page}`)
   }
   
   getFilteredSales(obj: any) {

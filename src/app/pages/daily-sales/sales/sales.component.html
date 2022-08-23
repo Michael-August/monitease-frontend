@@ -78,7 +78,7 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let data of datasource; let i = index">
+                <ng-container *ngFor="let data of datasource | paginate: { itemsPerPage: 10, currentPage: page, totalItems: response['count'] }"; let i = "index">
                     <tr>
                         <td>{{data['customername']}}</td>
                         <td>{{data['quantity']}}</td>
@@ -119,6 +119,7 @@
                 </ng-container>
             </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
     </div>
 </div>
 

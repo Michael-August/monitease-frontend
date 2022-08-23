@@ -7,6 +7,7 @@ import { DailyAccountComponent } from './daily-account/daily-account.component';
 import { WeeklyAccountComponent } from './weekly-account/weekly-account.component';
 import { MonthlyAccountComponent } from './monthly-account/monthly-account.component';
 import { FilterableAccountComponent } from './filterable-account/filterable-account.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -21,6 +22,7 @@ import { FilterableAccountComponent } from './filterable-account/filterable-acco
   imports: [
     CommonModule,
     DailySalesRouteModule,
+    NgxPaginationModule,
     SharedModule
   ]
 })
