@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import jsPDF from 'jspdf';
 import { UtilsService } from '../../services/utils.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class AccountTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @ViewChild('account', {static: false}) accountTable!: ElementRef
   @Input() displayColumns: any = []
   @Input() displayRows: any
   @Input() res: any
@@ -21,6 +23,23 @@ export class AccountTableComponent implements OnInit {
 
   search(value: any) {
     this.emitSearch.emit(value)
+  }
+
+  // emitGenerator() {
+  //   let pdf = new jsPDF({
+  //     unit: "mm",
+  //     format: 'a0'
+  //   })
+
+  //   pdf.html(this.accountTable.nativeElement, {
+  //     callback: (pdf) => {
+  //       pdf.save('account.pdf')
+  //     }
+  //   })
+  // }
+
+  emitGenerator() {
+    window.print()
   }
 
 }

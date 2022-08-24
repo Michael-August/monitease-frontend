@@ -8,7 +8,7 @@
         <div class="col-3 th form-group mt-2">
         </div>
         <div class="col-3 th form-group mt-2">
-            <button class="button btn">Export to PDF</button>
+            <button class="button btn" (click)="emitGenerator()">Export to PDF</button>
         </div>
     </div>
     <hr>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <table class="table">
+        <table class="table" #account>
             <thead>
                 <tr>
                     <th *ngFor="let headerCol of displayColumns">{{headerCol.value}}</th>
