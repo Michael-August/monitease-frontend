@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
     { key: 'is_verified', value: 'Status' }
   ]
 
-  datasource: Array<IUsers[]> = []
+  datasource: any = []
 
   form = new FormGroup({
     first_name: new FormControl('', [Validators.required]),

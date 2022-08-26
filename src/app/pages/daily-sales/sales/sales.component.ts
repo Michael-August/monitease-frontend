@@ -136,7 +136,6 @@ export class SalesComponent implements OnInit {
     this.allSrv.getSales(this.page).subscribe((res: any) => {
       this.datasource = res.results
       this.response = res
-      console.log(res);
     }, err => {
       if (err.error['detail'] === "Expired Token, login") {
         this.router.navigate(['/login'])
@@ -155,7 +154,11 @@ export class SalesComponent implements OnInit {
   }
 
   search(event: any) {
-    
+    this.utils.isLoading = true
+    this.allSrv.getSearchedSales(event).subscribe((res: any) => {
+      this.datasource = res.results
+      this.response = res
+    }).add(() => this.utils.isLoading = false)
   }
 
   changepaid() {

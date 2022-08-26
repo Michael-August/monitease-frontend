@@ -1,7 +1,7 @@
 <div class="custom_table_container">
     <div class="row">
-        <div class="col-3 th form-group mt-2">
-            <input #filterBy (keyup)="applyFilter(filterBy.value)" type="text" class="form-control" placeholder="search">
+        <div class="col-3 th form-group mt-2" [formGroup]="searchForm">
+            <input formControlName="searchValue" (keyup)="applyFilter()" type="text" class="form-control" placeholder="search">
         </div>
         <div class="col-3 th form-group mt-2">
         </div>
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let data of displayRows; let i = index">
+                <ng-container *ngFor="let data of displayRows$ | async; let i = index">
                     <tr>
                         <ng-container *ngFor="let headerCol of displayColumns">
                             <td>{{data[headerCol.key]}}</td>
@@ -56,7 +56,7 @@
                         </ng-container>
                     </tr>
                 </ng-container>
-                <ng-container *ngIf="!displayRows?.length">
+                <ng-container *ngIf="(displayRows$ | async)?.length == 0">
                     <tr>
                         <td colspan="10" class="text-center">
                             <span *ngIf="!isLoading">No Record Found</span>

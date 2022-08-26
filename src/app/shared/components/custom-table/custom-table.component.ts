@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-custom-table',
@@ -7,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CustomTableComponent implements OnInit {
 
-  @Input() displayRows: Array<any> = []
+  @Input() displayRows$?: Observable<any>
   @Input() displayColumns: Array<{ key: string, value: string }> = []
   @Input() asActionCol = true;
   @Input() isLoading: boolean = false
@@ -17,12 +19,16 @@ export class CustomTableComponent implements OnInit {
   // @Input() tableAction: TableAction;
 
   @Output() feedback: EventEmitter<any> = new EventEmitter<any>();
-  @Output() filterBy: EventEmitter<any> = new EventEmitter<any>()
+  @Output() searchTerm: EventEmitter<any> = new EventEmitter<any>()
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
 
   pageNumber = [10, 25, 50];
+  searchForm = new FormGroup({
+    searchValue: new FormControl('')
+  })
+  
 
   // dataSource: MatTableDataSource<any>;
 
@@ -63,8 +69,8 @@ export class CustomTableComponent implements OnInit {
   //   this.dataList$ = this.dataSource.connect();
   // }
 
-  applyFilter(filterValue: string): void {
-    this.filterBy.emit(filterValue)
+  applyFilter(): void {
+    this.searchTerm.emit(this.searchForm.controls['searchValue'])
   }
 
   emitSingleAction(action: string, data: any): void {

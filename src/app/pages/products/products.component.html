@@ -2,7 +2,7 @@
 
 <app-page-header [pageTitle]="title" [buttonLabel]="'Product'" [showAddButton]="true" (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
 
-<app-custom-table [displayColumns]="tableColumns" (filterBy)="search($event)" (feedback)="tableAction($event, template)" [displayRows]="datasource" [isView]="view" [isLoading]="utils.isLoading"></app-custom-table>
+<app-custom-table [displayColumns]="tableColumns" (searchTerm)="search($event)" (feedback)="tableAction($event, template)" [displayRows$]="datasource" [isView]="view" [isLoading]="utils.isLoading"></app-custom-table>
 
 <ng-template #template>
     <div class="modal-header">

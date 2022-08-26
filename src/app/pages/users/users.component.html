@@ -2,7 +2,7 @@
     (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
 
 
-<app-custom-table [displayColumns]="tableColumns" [displayRows]="datasource" [isLoading]="utils.isLoading">
+<app-custom-table [displayColumns]="tableColumns" [displayRows$]="datasource" [isLoading]="utils.isLoading">
 </app-custom-table>
 
 

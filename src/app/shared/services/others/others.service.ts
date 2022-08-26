@@ -27,6 +27,10 @@ export class OthersService {
     return this.http.get(`${this.base_url}/Products`)
   }
 
+  getSearchedProducts(search: any) {
+    return this.http.get(`${this.base_url}/Products?search=${search}`)
+  }
+
   // getProducts(): Observable<any> {
   //   return this.product$.asObservable()
   // }
@@ -59,6 +63,10 @@ export class OthersService {
   
   getFilteredSales(obj: any) {
     return this.http.get(`${this.base_url}/DailySales?customername=${obj.customername}&itemsold=${obj.itemsold}&datesold__gte=${obj.startDateSold}&datesold__lte=${obj.endDateSold}&havepaid=${obj.havePaid}&datepaid__gte=${obj.startDatePaid}&datepaid__lte=${obj.endDatePaid}`)
+  }
+
+  getSearchedSales(searchTerm: any) {
+    return this.http.get(`${this.base_url}/DailySales?search=${searchTerm}`)
   }
 
   postSales(payload: ISales) {

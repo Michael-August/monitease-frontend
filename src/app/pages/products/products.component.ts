@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged, filter, map, retry, startWith, switchMap } from 'rxjs';
 import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
 import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -53,23 +54,17 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.utils.isLoading = true
-    this.allSrv.getProducts().subscribe((res: any) => {
-      this.datasource = res      
-    }).add(() => this.utils.isLoading = false)
+    // this.utils.isLoading = true
+    this.datasource = this.allSrv.getProducts().pipe()
   }
 
   closeModal() {
     this.form.reset()
   }
 
-  search(event: any) {
+  search(event: FormControl) {
     console.log(event)
-    this.allSrv.getProducts().subscribe((res: any) => {
-      this.datasource = res.filter((data: any) => data.contains(event))
-      console.log(this.datasource);
-      
-    })
+    this.datasource = this.allSrv.getSearchedProducts(event.value)
   }
 
   submit() {
