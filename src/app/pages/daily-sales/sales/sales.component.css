@@ -1,3 +1,7 @@
+.sales {
+    animation: fadeIn 0.8s;
+}
+
 .table>tr {
     vertical-align: middle
 }
@@ -90,5 +94,15 @@ td>.btn {
 
     to {
         transform: translateY(0%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

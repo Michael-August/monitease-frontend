@@ -1,7 +1,10 @@
-<app-loader *ngIf="utils.isLoading"></app-loader>
+<div class="daily-accounts">
+    <app-loader *ngIf="utils.isLoading"></app-loader>
 
-<app-page-header [pageTitle]="title" [showAddButton]="false"></app-page-header>
+    <app-page-header [pageTitle]="title" [showAddButton]="false"></app-page-header>
 
-<app-account-table [displayRows]="datasource" [displayColumns]="tableColumns" [res]="totals"></app-account-table>
+    <app-account-table [displayRows]="datasource" [displayColumns]="tableColumns" [res]="totals"></app-account-table>
+</div>
+    
 
 

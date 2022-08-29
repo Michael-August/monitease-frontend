@@ -21,6 +21,26 @@ export class AuthService {
     return this.http.post(`${this.base_url}/Authentication/register`, payload)
   }
 
+  getUsers() {
+    return this.http.get(`${this.base_url}/Authentication`)
+  }
+
+  getSingleUser(id: number) {
+    return this.http.get(`${this.base_url}/Authentication/${id}`)
+  }
+
+  updateUser(payload: any) {
+    return this.http.put(`${this.base_url}/Authentication/${payload.id}`, payload)
+  }
+
+  resetPassword(payload: any) {
+    return this.http.patch(`${this.base_url}/Authentication/resetpassword`, payload)
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.base_url}/Authentication/${id}`)
+  }
+
   logout () {
     localStorage.clear()
     this.router.navigate(['/login'])

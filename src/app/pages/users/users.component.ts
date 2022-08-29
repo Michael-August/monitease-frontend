@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { OthersService } from 'src/app/shared/services/others/others.service';
+import { Observable } from 'rxjs';
+import { IRegister } from 'src/app/core/models/auth.model';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SWEET_ALERT, validateAllFormFields } from 'src/app/shared/utils';
 import { IUsers } from './users.model';
@@ -21,10 +23,10 @@ export class UsersComponent implements OnInit {
     { key: 'phone_number', value: 'Phone Number' },
     { key: 'email', value: 'Email' },
     { key: 'role', value: 'Role' },
-    { key: 'is_verified', value: 'Status' }
+    { key: 'is_verified', value: 'Is Verified' }
   ]
 
-  datasource: any = []
+  datasource?: Observable<any>
 
   form = new FormGroup({
     first_name: new FormControl('', [Validators.required]),
@@ -69,9 +71,10 @@ export class UsersComponent implements OnInit {
     return this.form.controls['is_verified']
   }
 
-  constructor(public utils: UtilsService, private otherSrv: OthersService) { }
+  constructor(public utils: UtilsService, private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.getUsers()
   }
 
   changeRole(e: any) {
@@ -79,6 +82,11 @@ export class UsersComponent implements OnInit {
       onlySelf: true,
     });
     
+  }
+
+  getUsers() {
+    // this.utils.isLoading = true
+    this.datasource = this.auth.getUsers().pipe()
   }
 
   submit() {
@@ -94,9 +102,9 @@ export class UsersComponent implements OnInit {
     this.process_submission(payload)
   }
 
-  private process_submission(payload: IUsers, newSubmission: boolean = true) {
+  private process_submission(payload: any, newSubmission: boolean = true) {
     this.utils.isLoading = true
-    const apiToCall = newSubmission ? this.otherSrv.register(payload) : this.otherSrv.postProduct(payload)
+    const apiToCall = newSubmission ? this.auth.register(payload) : this.auth.updateUser(payload)
 
     apiToCall.subscribe(res => {
       this.utils.modalRef.hide()

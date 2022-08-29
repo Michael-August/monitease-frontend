@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, filter, map, retry, startWith, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, retry, startWith, switchMap } from 'rxjs';
 import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
 import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
     { key: 'dateadded', value: 'Date created' }
   ]
 
-  datasource: any = []
+  datasource: Observable<any> | undefined
 
   get name() {
     return this.form.controls['item_name']
