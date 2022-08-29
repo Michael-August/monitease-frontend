@@ -12,6 +12,7 @@ import { ProductsComponent } from 'src/app/pages/products/products.component';
 import { EmployeesComponent } from 'src/app/pages/employees/employees.component';
 import { UsersComponent } from 'src/app/pages/users/users.component';
 import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
+import { SettingsComponent } from 'src/app/pages/settings/settings.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ProductDetailsComponent } from 'src/app/pages/product-details/product-d
     ProductDetailsComponent,
     EmployeesComponent,
     UsersComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,

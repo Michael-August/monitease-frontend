@@ -60,6 +60,10 @@ a {
     border-left: 2px solid white;
 }
 
+.side-bar .link-items li:active {
+    transform: scale(0.8);
+}
+
 .side-bar .logout {
     padding: 15px 30px;
     margin-top: 30px;

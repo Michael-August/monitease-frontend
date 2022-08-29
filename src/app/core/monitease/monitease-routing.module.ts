@@ -4,6 +4,7 @@ import { DashboardComponent } from "src/app/pages/dashboard/dashboard.component"
 import { EmployeesComponent } from "src/app/pages/employees/employees.component";
 import { ProductDetailsComponent } from "src/app/pages/product-details/product-details.component";
 import { ProductsComponent } from "src/app/pages/products/products.component";
+import { SettingsComponent } from "src/app/pages/settings/settings.component";
 import { UsersComponent } from "src/app/pages/users/users.component";
 import { MonitEaseComponent } from "./monitease.component";
 
@@ -18,6 +19,7 @@ const moniteaseValidRoute: Routes = [
             { path: 'products/:id', component: ProductDetailsComponent },
             { path: 'employees', component: EmployeesComponent },
             { path: 'users', component: UsersComponent },
+            { path: 'settings', component: SettingsComponent },
             { path: 'dailysales', loadChildren: () => import('../../pages/daily-sales/daily-sales.module').then(mod => mod.DailySalesModule) }
         ]
     }

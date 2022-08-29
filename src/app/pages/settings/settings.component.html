@@ -1,0 +1,123 @@
+<app-loader *ngIf="utils.isLoading"></app-loader>
+
+<app-page-header [pageTitle]="title" [buttonLabel]="'Sales'" [showAddButton]="false"></app-page-header>
+
+<div class="settings mt-4">
+    <div class="user-summary">
+        <img class="mb-4" src="../../../assets/images/profile.png" alt="">
+        <p>Full name</p>
+        <p>Email</p>
+        <p>Phone Number</p>
+        <p>Role</p>
+    </div>
+    <div class="settings-proper">
+        <div class="mini-nav">
+            <ul class="tabs">
+                <li (click)="switchTabs('edit')" [class]="{active: tabs.activeTab==='edit'}">Edit Profile</li>
+                <li (click)="switchTabs('reset')" [class]="{active: tabs.activeTab==='reset'}">Reset Password</li>
+            </ul>
+            <hr>
+            <ng-container *ngIf="tabs.activeTab==='edit'">
+                <div class="edit">
+                    <h4>Edit Profile</h4>
+
+                    <form [formGroup]="form" class="mt-4" (ngSubmit)="submit()">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="icon-input">
+                                    <i class="fa fa-cc-amex envelope"></i>
+                                    <input formControlName="first_name" type="text" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="text-danger" *ngIf="first_name.invalid && (first_name.touched || first_name.dirty)">
+                                    <small>Enter First Name</small>
+                                </div>
+                            </div>
+                    
+                            <div class="form-group col-md-6">
+                                <div class="icon-input">
+                                    <i class="fa fa-lastfm key"></i>
+                                    <input formControlName="last_name" type="text" class="form-control" placeholder="Last Name">
+                                </div>
+                                <div class="text-danger" *ngIf="last_name.invalid && (last_name.touched || last_name.dirty)">
+                                    <small>Enter Last Name</small>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <div class="icon-input">
+                                <i class="fa fa-envelope envelope"></i>
+                                <input formControlName="email" type="text" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="text-danger" *ngIf="email.invalid && (email.touched || email.dirty)">
+                                <small>Enter Email</small>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <div class="icon-input">
+                                <i class="fa fa-user key"></i>
+                                <input formControlName="username" type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="text-danger" *ngIf="username.invalid && (username.touched || username.dirty)">
+                                <small>Enter Username</small>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <div class="icon-input">
+                                <i class="fa fa-phone key"></i>
+                                <input formControlName="phone_number" type="tel" class="form-control" placeholder="Phone">
+                            </div>
+                            <div class="text-danger" *ngIf="phone_number.invalid && (phone_number.touched || phone_number.dirty)">
+                                <small>Enter Phone Number</small>
+                            </div>
+                            <div class="text-danger" *ngIf="phone_number.hasError('maxlength')">
+                                <small>Phon number must not be more than 15</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Edit</button>
+                    </form>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="tabs.activeTab==='reset'">
+                <div class="reset">
+                    <h4>Reset Password</h4>
+
+                    <div class="form-group">
+                        <div class="icon-input">
+                            <i class="fa fa-envelope envelope"></i>
+                            <input formControlName="email" type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="text-danger" *ngIf="email.invalid && (email.touched || email.dirty)">
+                            <small>Enter Email</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="icon-input">
+                            <i class="fa fa-key key"></i>
+                            <input formControlName="password" type="password" class="form-control" placeholder="XXXXXXXXXXX">
+                        </div>
+                        <div class="text-danger" *ngIf="username.invalid && (username.touched || username.dirty)">
+                            <small>Enter Username</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="icon-input">
+                            <i class="fa fa-key key"></i>
+                            <input formControlName="confirmPassword" type="password" class="form-control" placeholder="XXXXXXXXXXX">
+                        </div>
+                        <div class="text-danger" *ngIf="phone_number.invalid && (phone_number.touched || phone_number.dirty)">
+                            <small>Enter Phone Number</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Reset</button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

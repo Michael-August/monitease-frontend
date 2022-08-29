@@ -1,0 +1,98 @@
+.settings {
+    display: flex;
+    height: 70vh;
+    width: 100%;
+    /* box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.4); */
+    border-radius: 8px;
+}
+
+.user-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33.33%;
+    height: 100%;
+    padding: 30px;
+    background-color: rgb(223, 223, 223);
+    border-radius: 8px 0 0 8px;
+}
+
+.user-summary img {
+    width: 40%;
+}
+
+.user-summary p {
+    margin-bottom: 3px
+}
+
+.settings-proper {
+    height: 100%;
+    width: 66.66%;
+    padding: 30px;
+    border-radius: 0 8px 8px 0;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    align-items: center;
+    margin-bottom: 20px;
+    list-style: none;
+    font-size: 17px;
+}
+
+.tabs li {
+    margin-right: 2em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tabs li:hover {
+    opacity: 0.7;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 3px;
+}
+
+.tabs li:active {
+    transform: scale(0.8);
+}
+
+.active {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 3px;
+}
+
+.edit, .reset {
+    animation: fadeIn 0.8s;
+}
+
+.icon-input {
+    position: relative;
+}
+
+.fa {
+    position: absolute;
+    left: 10px;
+    top: 30%;
+}
+
+input {
+    padding: 1.5em;
+    padding-left: 2.4rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: gray;
+    box-shadow: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

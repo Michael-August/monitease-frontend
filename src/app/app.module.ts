@@ -12,6 +12,7 @@ import { RequestsInterceptor } from './core/interceptors/requests.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
