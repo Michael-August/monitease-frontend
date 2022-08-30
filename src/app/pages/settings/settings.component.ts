@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { SWEET_ALERT } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-settings',
@@ -31,7 +32,7 @@ export class SettingsComponent implements OnInit {
   })
 
   resetForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    // email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
     confirm_password: new FormControl('', [Validators.required])
   })
@@ -60,9 +61,10 @@ export class SettingsComponent implements OnInit {
     return this.form.controls['phone_number']
   }
 
-  get reset_email() {
-    return this.resetForm.controls['email']
-  }
+
+  // get reset_email() {
+  //   return this.resetForm.controls['email']
+  // }
 
   get password() {
     return this.resetForm.controls['password']
@@ -77,7 +79,7 @@ export class SettingsComponent implements OnInit {
     this.user = JSON.parse(user)
     let userId: any = this.user.id
     this.utils.isLoading = true
-    this.auth.getSingleUser(userId).subscribe(res => this.form.patchValue(res)).add(() => this.utils.isLoading = false)
+    this.auth.getSingleUser(userId).subscribe(res => {this.form.patchValue(res); console.log(res)}).add(() => this.utils.isLoading = false)
   }
 
   switchTabs(tabName: string) {
@@ -86,16 +88,23 @@ export class SettingsComponent implements OnInit {
   }
 
   edit() {
-
+    this.utils.isLoading = true
+    let payload = this.form.value
+    payload['id'] = this.user.id
+    this.auth.updateUser(payload).subscribe(res => {
+      SWEET_ALERT('Successful', `user ${payload['username']} updated successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+      localStorage.setItem('User', JSON.stringify(res))
+      this.getUserInfo()
+    }).add(() => this.utils.isLoading = false)
   }
 
   reset() {
-    // this.utils.isLoading = true
+    this.utils.isLoading = true
     let payload = this.resetForm.value
-    if (payload['password'] !== payload['confirm_password']) {
-      this.unmatchedpassword = "Password doesn't match"
-    }
-    this.auth.resetPassword(payload).subscribe(res => console.log)
+    // if (payload['password'] !== payload['confirm_password']) {
+    //   this.unmatchedpassword = "Password doesn't match"
+    // }
+    this.auth.resetPassword(payload).subscribe(res => console.log(res)).add(() => this.utils.isLoading = false)
   }
 
 }

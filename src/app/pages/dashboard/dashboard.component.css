@@ -5,6 +5,10 @@
     font-weight: 600;
 }
 
+.emoji {
+    background-color: var(--primary-color);
+}
+
 .col-md-3 {
     padding-right: 0%;
 }

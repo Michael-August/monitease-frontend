@@ -21,6 +21,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(err => {
         if (err.status === 403) {
+          console.log(err);
+          
           this.authSrv.logout();
           SWEET_ALERT('Session Expired', 'Your session has expired, you will have to log in again', 'info', 'info', 'ok', false, undefined, undefined)
         }
