@@ -23,12 +23,11 @@ export class OthersService {
   //   })
   // }
 
-  getProducts() {
+  getProducts(search?: any) {
+    if (search) {
+      return this.http.get(`${this.base_url}/Products?search=${search}`)
+    }
     return this.http.get(`${this.base_url}/Products`)
-  }
-
-  getSearchedProducts(search: any) {
-    return this.http.get(`${this.base_url}/Products?search=${search}`)
   }
 
   // getProducts(): Observable<any> {
@@ -51,13 +50,11 @@ export class OthersService {
     return this.http.delete(`${this.base_url}/Products/${id}`)
   }
 
-  // Users
-  register(payload: IUsers) {
-    return this.http.post(`${this.base_url}/Authentication/register`, payload)
-  }
-
   // Sales
-  getSales(page: any) {
+  getSales(page: any, searchTerm?: any) {
+    if(searchTerm) {
+      return this.http.get(`${this.base_url}/DailySales?search=${searchTerm}`)
+    }
     return this.http.get(`${this.base_url}/DailySales?page=${page}`)
   }
   
@@ -65,9 +62,9 @@ export class OthersService {
     return this.http.get(`${this.base_url}/DailySales?customername=${obj.customername}&itemsold=${obj.itemsold}&datesold__gte=${obj.startDateSold}&datesold__lte=${obj.endDateSold}&havepaid=${obj.havePaid}&datepaid__gte=${obj.startDatePaid}&datepaid__lte=${obj.endDatePaid}`)
   }
 
-  getSearchedSales(searchTerm: any) {
-    return this.http.get(`${this.base_url}/DailySales?search=${searchTerm}`)
-  }
+  // getSearchedSales(searchTerm: any) {
+  //   return this.http.get(`${this.base_url}/DailySales?search=${searchTerm}`)
+  // }
 
   postSales(payload: ISales) {
     return this.http.post(`${this.base_url}/DailySales/`, payload)

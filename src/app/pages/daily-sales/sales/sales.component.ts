@@ -155,7 +155,7 @@ export class SalesComponent implements OnInit {
 
   search(event: any) {
     this.utils.isLoading = true
-    this.allSrv.getSearchedSales(event).subscribe((res: any) => {
+    this.allSrv.getSales(this.page, event).subscribe((res: any) => {
       this.datasource = res.results
       this.response = res
     }).add(() => this.utils.isLoading = false)

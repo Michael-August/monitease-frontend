@@ -64,13 +64,13 @@ export class ProductsComponent implements OnInit {
 
   search(event: FormControl) {
     console.log(event)
-    this.datasource = this.allSrv.getSearchedProducts(event.value)
+    this.datasource = this.allSrv.getProducts(event.value)
   }
 
   submit() {
     this.utils.isLoading = true
     const payload: IProduct = this.form.value
-    // payload['total_added'] = this.quantity.value
+    payload['total_added'] = this.quantity.value
     if (this.isNew) {
       this.allSrv.postProduct(payload).subscribe(res => {
         console.log(res);
