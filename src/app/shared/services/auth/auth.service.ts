@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 import { Router } from '@angular/router';
 import { ILogin, IRegister } from 'src/app/core/models/auth.model';
-import { BASE_URL } from 'src/environments/environment';
+// import { BASE_URL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  base_url = BASE_URL
+  base_url = environment.BASE_URL
 
   constructor(private http: HttpClient, private router: Router) { }
 

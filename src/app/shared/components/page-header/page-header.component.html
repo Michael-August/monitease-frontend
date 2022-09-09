@@ -13,6 +13,12 @@
                 <i class="fa fa-plus"></i> New {{buttonLabel}}
             </button>
         </ng-container>
+
+        <ng-container *ngIf="detailPage">
+            <button type="button" class="btn rounded-pill" (click)="triggerAddButton()">
+                <i class="fa fa-plus"></i> Restock {{buttonLabel}}
+            </button>
+        </ng-container>
     </div>
 </div>
 <hr>

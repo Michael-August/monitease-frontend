@@ -17,6 +17,7 @@ export class PageHeaderComponent implements OnInit {
   @Input() pageTitle: string = ''
   @Input() buttonLabel: string = ''
   @Input() showAddButton: boolean = true
+  @Input() detailPage: boolean = false
 
   @Output() buttonAction: EventEmitter<boolean> = new EventEmitter<boolean>();
 
