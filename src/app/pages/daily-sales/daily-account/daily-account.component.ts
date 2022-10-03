@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { SWEET_ALERT } from 'src/app/shared/utils';
 import { ISales } from '../sales.model';
 
 @Component({
@@ -10,7 +12,7 @@ import { ISales } from '../sales.model';
 })
 export class DailyAccountComponent implements OnInit {
 
-  constructor(public utils: UtilsService, private allSrv: OthersService) { }
+  constructor(public utils: UtilsService, private allSrv: OthersService, private router: Router) { }
 
   title = 'Daily Account'
   
@@ -41,6 +43,13 @@ export class DailyAccountComponent implements OnInit {
     this.allSrv.getDailyAccount().subscribe((res: any) => {
       this.datasource = res.data
       this.totals = res
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 

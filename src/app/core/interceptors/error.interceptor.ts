@@ -8,6 +8,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { SWEET_ALERT } from 'src/app/shared/utils';
+import { Router } from '@angular/router';
 
 const maxRetries = 2
 const delayMs = 2000
@@ -15,7 +16,7 @@ const delayMs = 2000
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private authSrv: AuthService) {}
+  constructor(private authSrv: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(

@@ -1,10 +1,13 @@
-<div class="side-bar" id="side-bar">
+<div class="open side-bar" id="side-bar" *ngIf="!showMenu">
     <div class="logo">
         <h2><i class="fa fa-envira"></i>MonitEase</h2>
+        <h4 class=""><i class="fa fa-close" (click)="showMenu = true"></i></h4>
     </div>
+
     <div class="link-items" id="link-items">
         <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-tachometer"></i>Dashboard</li>
-        <a href="#sales" class="collapsed" data-toggle="collapse" data-parent="#sidebar"
+        <li *ngIf="userInfo.role === 'OTHERS'" routerLink="/dailysales/sales" routerLinkActive="active"><i class="fa fa-cart-plus"></i>Sales</li>
+        <a  *ngIf="userInfo.role !== 'OTHERS'" href="#sales" class="collapsed" data-toggle="collapse" data-parent="#sidebar"
             aria-expanded="false">
             <li routerLinkActive="active">
                 <i class="fa fa-cart-plus"></i>Daily Sales <i class="fa fa-angle-right"></i>
@@ -40,10 +43,11 @@
         <li routerLink="/products" routerLinkActive="active"><i class="fa fa-filter"></i>Products</li>
         <li routerLink="/employees" routerLinkActive="active"><i class="fa fa-briefcase"></i>Employees</li>
         <li><i class="fa fa-eercast"></i>Collected Items</li>
-        <li routerLink="/users" routerLinkActive="active"><i class="fa fa-users"></i>Users</li>
+        <li *ngIf="userInfo.role !== 'OTHERS'" routerLink="/users" routerLinkActive="active"><i class="fa fa-users"></i>Users</li>
         <li routerLink="/settings" routerLinkActive="active"><i class="fa fa-gear"></i>Settings</li>
     </div>
     <div class="logout">
         <p (click)="logout()"><i class="fa fa-sign-out"></i> Logout</p>
     </div>
 </div>
+

@@ -70,8 +70,8 @@ export class ProductsComponent implements OnInit {
   submit() {
     this.utils.isLoading = true
     const payload: IProduct = this.form.value
-    payload['total_added'] = this.quantity.value
     if (this.isNew) {
+      payload['total_added'] = this.quantity.value
       this.allSrv.postProduct(payload).subscribe(res => {
         console.log(res);
         this.utils.modalRef.hide()
@@ -79,9 +79,13 @@ export class ProductsComponent implements OnInit {
         this.form.reset()
         this.getProducts()
       }, err => {
-        console.log(err);
         this.utils.modalRef.hide()
-        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        if (err.status === 403) {
+          this.router.navigate(['/dashboard'])
+          SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        }
       }).add(() => this.utils.isLoading = false)
       return;
     }
@@ -95,16 +99,20 @@ export class ProductsComponent implements OnInit {
         this.form.reset()
         this.getProducts()
       }, err => {
-        console.log(err);
         this.utils.modalRef.hide()
-        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        if (err.status === 403) {
+          this.router.navigate(['/dashboard'])
+          SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        }
       }).add(() => {
         this.utils.isLoading = false
         this.utils.objectId = 0
       })
       return;
     }
-    
+
   }
 
   private process_delete(id: number) {
@@ -114,7 +122,12 @@ export class ProductsComponent implements OnInit {
       this.getProducts()
       console.log('Done')
     }, err => {
-      SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 
@@ -133,9 +146,9 @@ export class ProductsComponent implements OnInit {
               this.process_delete(event.data.id);
             }
           });
-          break
+        break
       case 'VIEW':
-          this.router.navigate([`/products/${event.data.id}`])
+        this.router.navigate([`/products/${event.data.id}`])
         break;
     }
   }

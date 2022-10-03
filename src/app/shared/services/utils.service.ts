@@ -12,6 +12,7 @@ export class UtilsService {
     isLoading: boolean = false;
 
     objectId: number = 0
+    toggleSideBar: boolean = false
 
     constructor(private location: Location, private modalService: BsModalService, private datePipe: DatePipe) {
     }

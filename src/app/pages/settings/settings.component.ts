@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SWEET_ALERT } from 'src/app/shared/utils';
@@ -11,7 +12,7 @@ import { SWEET_ALERT } from 'src/app/shared/utils';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(public utils: UtilsService, private auth: AuthService) { }
+  constructor(public utils: UtilsService, private auth: AuthService, private router: Router) { }
 
   title: string = 'Settings'
   user: any
@@ -95,6 +96,13 @@ export class SettingsComponent implements OnInit {
       SWEET_ALERT('Successful', `user ${payload['username']} updated successfully`, 'success', 'success', 'OK', false, undefined, undefined)
       localStorage.setItem('User', JSON.stringify(res))
       this.getUserInfo()
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 

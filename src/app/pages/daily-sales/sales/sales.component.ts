@@ -124,9 +124,11 @@ export class SalesComponent implements OnInit {
     this.allSrv.getProducts().subscribe((res: any) => {
       this.products = res
     }, err => {
-      if (err.error['detail'] === "Expired Token, login") {
-        this.router.navigate(['/login'])
-        SWEET_ALERT('Error', 'Expired Token, login again', 'error', 'error', 'OK', false, undefined, undefined)
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
       }
     })
   }
@@ -137,9 +139,11 @@ export class SalesComponent implements OnInit {
       this.datasource = res.results
       this.response = res
     }, err => {
-      if (err.error['detail'] === "Expired Token, login") {
-        this.router.navigate(['/login'])
-        SWEET_ALERT('Error', 'Expired Token, login again', 'error', 'error', 'OK', false, undefined, undefined)
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
       }
     }).add(() => this.utils.isLoading = false)
   }
@@ -150,6 +154,13 @@ export class SalesComponent implements OnInit {
     this.allSrv.getFilteredSales(payload).subscribe((res: any) => {
       this.datasource = res.results
       this.filterForm.reset()
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 
@@ -158,6 +169,13 @@ export class SalesComponent implements OnInit {
     this.allSrv.getSales(this.page, event).subscribe((res: any) => {
       this.datasource = res.results
       this.response = res
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 
@@ -168,6 +186,13 @@ export class SalesComponent implements OnInit {
     this.allSrv.updateHavepaid(this.paidData, this.paidData['id']).subscribe((res: any) => {
       this.utils.modalRef.hide()
       this.getSales()
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 
@@ -187,6 +212,13 @@ export class SalesComponent implements OnInit {
       this.utils.isLoading = true
       this.allSrv.updateHavepaid(this.paidData, this.paidData['id']).subscribe((res: any) => {
         this.getSales()
+      }, err => {
+        if (err.status === 403) {
+          this.router.navigate(['/dashboard'])
+          SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        }
       }).add(() => this.utils.isLoading = false)    
     }
   }
@@ -211,7 +243,12 @@ export class SalesComponent implements OnInit {
       }, err => {
         console.log(err);
         this.utils.modalRef.hide()
-        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        if (err.status === 403) {
+          this.router.navigate(['/dashboard'])
+          SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        }
       }).add(() => this.utils.isLoading = false)
     }
 
@@ -225,7 +262,12 @@ export class SalesComponent implements OnInit {
       }, err => {
         console.log(err);
         this.utils.modalRef.hide()
-        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        if (err.status === 403) {
+          this.router.navigate(['/dashboard'])
+          SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        }
       }).add(() => {
         this.utils.isLoading = false
         this.utils.objectId = 0
@@ -239,7 +281,12 @@ export class SalesComponent implements OnInit {
       SWEET_ALERT('Successful', `Sale deleted successfully`, 'success', 'success', 'OK', false, undefined, undefined)
       this.getSales()
     }, err => {
-      SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
   }
 

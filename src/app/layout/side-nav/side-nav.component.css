@@ -11,15 +11,34 @@ a {
     top: 0%;
     left: 0;
     overflow-y: scroll;
+    transition: all 0.5s;
+    /* animation: slidein 0.5s; */
+}
+
+.slidein {
+    animation: slidein 0.5s;
+    width: 300px;
+}
+
+.slideout {
+    animation: slideout 0.5s;
+    width: 0px;
 }
 
 .side-bar .logo {
     color: white;
+    display: flex;
+    align-items: center;
+}
+
+.fa-close {
+    display: none;
 }
 
 .side-bar .logo h2 {
     font-family: var(--logo-font-family);
     padding-left: 30px;
+    margin-right: 10px;
 }
 
 .side-bar .logo h2 i {
@@ -105,10 +124,45 @@ a {
     .side-bar {
         width: 270px;
         position: fixed;
+        z-index: 1000;
         left: -270px;
     }
 
-    .side-bar.open {
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .fa-close {
+        color: red;
+        margin-left: 25px;
+        cursor: pointer;
+        display: block;
+    }
+
+    .open {
+        position: fixed;
         left: 0px;
+        width: 270px;
+        z-index: 1000;
+        /* left: -270px; */
+    }
+}
+
+@keyframes slidein {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(300px);
+    }
+}
+
+@keyframes slideout {
+    from {
+        transform: translateX(0px);
+    }
+
+    to {
+        transform: translateX(0px);
     }
 }

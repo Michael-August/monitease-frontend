@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IRegister } from 'src/app/core/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SWEET_ALERT, validateAllFormFields } from 'src/app/shared/utils';
 import { IUsers } from './users.model';
@@ -32,12 +34,13 @@ export class UsersComponent implements OnInit {
     first_name: new FormControl('', [Validators.required]),
     last_name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     phone_number: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.minLength(8)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     role: new FormControl('', [Validators.required]),
     is_verified: new FormControl('', [Validators.required])
   })
+  isNew: Boolean = true
 
   get first_name() {
     return this.form.controls['first_name']
@@ -71,7 +74,7 @@ export class UsersComponent implements OnInit {
     return this.form.controls['is_verified']
   }
 
-  constructor(public utils: UtilsService, private auth: AuthService) { }
+  constructor(public utils: UtilsService, private auth: AuthService, private alertService: NotificationService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUsers()
@@ -81,7 +84,7 @@ export class UsersComponent implements OnInit {
     this.role.setValue(e.target.value, {
       onlySelf: true,
     });
-    
+
   }
 
   getUsers() {
@@ -90,16 +93,18 @@ export class UsersComponent implements OnInit {
   }
 
   submit() {
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       return validateAllFormFields(this.form)
     }
     const payload = this.form.value;
     if (this.utils.objectId) {
       payload['id'] = this.utils.objectId;
       this.process_submission(payload, false);
+      this.getUsers()
       return;
     }
     this.process_submission(payload)
+    this.getUsers()
   }
 
   private process_submission(payload: any, newSubmission: boolean = true) {
@@ -112,8 +117,47 @@ export class UsersComponent implements OnInit {
     }, err => {
       this.utils.modalRef.hide()
       console.log(err)
-      SWEET_ALERT('Failed', `${err.error.err}`, 'error', 'error', 'OK', false, undefined, undefined)
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
     }).add(() => this.utils.isLoading = false)
+  }
+
+  private process_delete(id: number) {
+    this.utils.isLoading = true
+    this.auth.deleteUser(id).subscribe(res => {
+      SWEET_ALERT('Successful', `User deleted successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+      this.getUsers()
+      console.log('Done')
+    }, err => {
+      if (err.status === 403) {
+        this.router.navigate(['/dashboard'])
+        SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
+      } else {
+        SWEET_ALERT('Failed', `${err.error.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+      }
+    }).add(() => this.utils.isLoading = false)
+  }
+
+  tableAction(event: { action: string, type: string, data: IUsers }, modal: TemplateRef<any>) {
+    switch (event.action) {
+      case 'EDIT':
+        this.utils.triggerModal(modal, ['modal-md, modal-dialog-centered'])
+        this.form.patchValue(event.data)
+        this.utils.objectId = event.data.id
+        break;
+      case 'DELETE':
+        (this.alertService.popUpAlert('', `Are you sure you want to Delete ${event.data.first_name}?`,
+          AlertType.Confirm, true) as Promise<any>).then((arg) => {
+            if (arg.value) {
+              this.process_delete(event.data.id);
+            }
+          });
+        break
+    }
   }
 
 }

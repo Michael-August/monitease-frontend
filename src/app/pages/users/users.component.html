@@ -2,13 +2,13 @@
     (buttonAction)="utils.triggerModal(template, ['modal-md, modal-dialog-centered'])"></app-page-header>
 
 
-<app-custom-table [displayColumns]="tableColumns" [displayRows$]="datasource" [isLoading]="utils.isLoading">
+<app-custom-table [displayColumns]="tableColumns" [displayRows$]="datasource" (feedback)="tableAction($event, template)" [isView]="false" [isLoading]="utils.isLoading">
 </app-custom-table>
 
 
 <ng-template #template>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Products</h4>
+        <h4 class="modal-title pull-left">Users</h4>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="utils.modalRef.hide()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>

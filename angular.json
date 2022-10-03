@@ -29,7 +29,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/scripts.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -95,9 +97,11 @@
               "src/_redirects"
             ],
             "styles": [
-              "src/styles.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              
+            ]
           }
         }
       }

@@ -67,8 +67,8 @@
                         <p class="product name">{{product.item_name}}</p>
                         <p>{{product.percent}}%</p>
                     </div>
-                    <div class="percent-level" [ngClass]="product.percent >= 50 ? 'bg-success-light' : (product.percent <= 49 && product.percent >= 45 ? 'bg-warning-light' : 'bg-danger-light')">
-                        <div class="actual-level" [ngStyle]="{'width': product.percent}" [ngClass]="product.percent >= 50 ? 'bg-success' : (product.percent <= 49 && product.percent>= 45 ? 'bg-warning' : 'bg-danger')"></div>
+                    <div class="percent-level" [ngClass]="product.percent >= 50 ? 'bg-success-light' : (product.percent <= 49 && product.percent >= 40 ? 'bg-warning-light' : 'bg-danger-light')">
+                        <div class="actual-level" [ngStyle]="{'width': product.percent + '%'}" [ngClass]="product.percent >= 50 ? 'bg-success' : (product.percent <= 49 && product.percent>= 40 ? 'bg-warning' : 'bg-danger')"></div>
                     </div>
                 </div>
                 
