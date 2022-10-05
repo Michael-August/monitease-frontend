@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { BASE_URL } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUsers } from 'src/app/pages/users/users.model';
 import { ISales } from 'src/app/pages/daily-sales/sales.model';
@@ -11,8 +10,7 @@ import { ISales } from 'src/app/pages/daily-sales/sales.model';
 })
 export class OthersService {
 
-  // base_url = environment.BASE_URL
-  base_url = BASE_URL
+  base_url = environment.BASE_URL
   product$: BehaviorSubject<any> = new BehaviorSubject<any>(null)
 
   constructor(private http: HttpClient) { 
