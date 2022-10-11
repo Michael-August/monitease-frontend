@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { IRegister } from 'src/app/core/models/auth.model';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
@@ -88,8 +88,10 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    // this.utils.isLoading = true
-    this.datasource = this.auth.getUsers().pipe()
+    this.utils.isLoading = true
+    this.datasource = this.auth.getUsers().pipe(
+      tap(() => this.utils.isLoading = false)
+    )
   }
 
   submit() {

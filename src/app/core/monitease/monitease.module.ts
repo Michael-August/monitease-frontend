@@ -13,6 +13,7 @@ import { EmployeesComponent } from 'src/app/pages/employees/employees.component'
 import { UsersComponent } from 'src/app/pages/users/users.component';
 import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
 import { SettingsComponent } from 'src/app/pages/settings/settings.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -25,12 +26,13 @@ import { SettingsComponent } from 'src/app/pages/settings/settings.component';
     ProductDetailsComponent,
     EmployeesComponent,
     UsersComponent,
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
     MonitEaseRoutingModule,
-    SharedModule
+    SharedModule,
+    NgApexchartsModule,
   ]
 })
 export class MoniteaseModule { }

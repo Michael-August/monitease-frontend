@@ -69,17 +69,17 @@
     margin-bottom: -0.1rem;
 }
 
-.products {
+.card {
     padding: 20px;
     color: black;
 }
 
-.products .head {
+.card .head {
     display: flex;
     justify-content: space-between;
 }
 
-.products .head p {
+.card .head p {
     background: transparent;
     border: 1px solid black;
     color: black;
@@ -89,12 +89,12 @@
     transition: all 0.4s;
 }
 
-.products .head p:hover {
+.card .head p:hover {
     background-color: var(--primary-color);
     color: white;
 }
 
-.products .percentage .title {
+.card .percentage .title {
     display: flex;
     justify-content: space-between;
 }
@@ -112,10 +112,18 @@
     border-radius: 5px;
 }
 
+#product_chart {
+    width: 70%;
+}
+
 @media (max-width: 768px) {
     .col-md-3 {
         padding-left: 0%;
         padding-right: 0%;
+    }
+
+    #product_chart {
+        width: 100%;
     }
 
     /* .sum-card {
@@ -126,6 +134,14 @@
 @media (max-width: 412px) {
     .card {
         margin-bottom: 10px;
+    }
+
+    #product_chart {
+        width: 100%;
+    }
+
+    #sales_chart {
+        width: 100%;
     }
 
     /* .sum-card {

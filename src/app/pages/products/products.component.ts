@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, retry, startWith, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, retry, startWith, switchMap, tap } from 'rxjs';
 import { AlertType, NotificationService } from 'src/app/shared/services/notification.service';
 import { OthersService } from 'src/app/shared/services/others/others.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit {
   title: string = 'Products'
   isNew: boolean = true
   view: boolean = false
+
+  total_added: any 
 
   form = new FormGroup({
     item_name: new FormControl('', [Validators.required]),
@@ -54,8 +56,10 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    // this.utils.isLoading = true
-    this.datasource = this.allSrv.getProducts().pipe()
+    this.utils.isLoading = true
+    this.datasource = this.allSrv.getProducts().pipe(
+      tap(() => this.utils.isLoading = false)
+    )
   }
 
   closeModal() {
@@ -72,10 +76,14 @@ export class ProductsComponent implements OnInit {
     const payload: IProduct = this.form.value
     if (this.isNew) {
       payload['total_added'] = this.quantity.value
-      this.allSrv.postProduct(payload).subscribe(res => {
+      this.allSrv.postProduct(payload).subscribe((res: any) => {
         console.log(res);
         this.utils.modalRef.hide()
-        SWEET_ALERT('Successful', `Product ${this.name.value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        if (res.message == "Product already exist") {
+          SWEET_ALERT('Error', `${res.message}`, 'error', 'error', 'OK', false, undefined, undefined)
+        } else {
+          SWEET_ALERT('Successful', `Product ${this.name.value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        }
         this.form.reset()
         this.getProducts()
       }, err => {
@@ -92,6 +100,7 @@ export class ProductsComponent implements OnInit {
 
     if (!this.isNew) {
       payload['id'] = this.utils.objectId
+      payload['total_added'] = this.total_added
       this.allSrv.updateProduct(payload, payload['id']).subscribe(res => {
         console.log(res);
         this.utils.modalRef.hide()
@@ -136,6 +145,7 @@ export class ProductsComponent implements OnInit {
       case 'EDIT':
         this.utils.triggerModal(modal, ['modal-md, modal-dialog-centered'])
         this.form.patchValue(event.data)
+        this.total_added = event.data.total_added
         this.utils.objectId = event.data.id
         this.isNew = false
         break;
