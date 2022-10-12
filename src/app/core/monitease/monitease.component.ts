@@ -63,19 +63,6 @@ export class MonitEaseComponent implements OnInit {
     }
 
     toggleSideBar(event: any) {
-        // console.log(event);
-        // if(event == true) {
-        //     $('#bar').click( () => {
-        //         $('#side-bar').addClass("slideout")
-        //         $(this).css("width", "100%")
-        //     })
-        // } 
-        // if(event == false) {
-        //     $('#bar').click(function () {
-        //         $('#side-bar').addClass("slidein")
-                
-        //     })
-        // }
         this.sideBarState = event
         console.log(event);
     }

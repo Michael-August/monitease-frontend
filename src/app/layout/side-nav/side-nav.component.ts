@@ -23,7 +23,7 @@ export class SideNavComponent implements OnInit, OnChanges {
     this.userInfo = JSON.parse(user)
 
     console.log(this.showMenu);
-    
+
   }
 
   // toggleMenu() {
@@ -35,7 +35,7 @@ export class SideNavComponent implements OnInit, OnChanges {
     console.log(this.showMenu);
   }
 
-  logout(){
+  logout() {
     this.authSrv.logout()
   }
 
