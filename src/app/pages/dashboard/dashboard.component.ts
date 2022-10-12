@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   weeklyAccount: ISales[] = []
   daysAndReport: any
   salesDays: any
-  salesData: number = 0
+  salesData: any
   formattedWeeklyAccount: ISales[] | undefined
   products: Array<IProduct> = []
   default: Number = 50
@@ -37,12 +37,11 @@ export class DashboardComponent implements OnInit {
     this.getDailyAccount()
 
     this.getWeeklyAccount()
-    console.log(this.salesChartOptions.xaxis.categories)
   }
 
   salesChartOptions = {
     salesSeries: [{
-      data: [400, 430]
+      data: []
     }],
 
     plotOptions: {
@@ -97,7 +96,7 @@ export class DashboardComponent implements OnInit {
 
       for (const prop in this.daysAndReport) {
         this.salesData = this.daysAndReport[prop].length
-        this.salesChartOptions.salesSeries[0].data = [this.salesData]
+        this.salesChartOptions.salesSeries[0].data.push(this.salesData as never)
       }
       
     })
@@ -107,7 +106,7 @@ export class DashboardComponent implements OnInit {
     this.utils.isLoading = true
     this.allSrv.getSales(this.page).subscribe((res: any) => {
       this.noOfSales = res.count
-      this.sales = res.results
+      this.sales = res.results.slice(0, 8)
     }).add(() => this.utils.isLoading = false)
   }
 

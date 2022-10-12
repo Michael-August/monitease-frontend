@@ -138,6 +138,7 @@ export class SalesComponent implements OnInit {
     this.allSrv.getSales(this.page).subscribe((res: any) => {
       this.datasource = res.results
       this.response = res
+      console.log(this.response)
     }, err => {
       if (err.status === 403) {
         this.router.navigate(['/dashboard'])

@@ -84,7 +84,7 @@
                     <h4>Recent Sales</h4>
                     <p (click)="allSales()">view all</p>
                 </div>
-                <div class="percentage mb-3" *ngFor="let sale of sales | slice:0:8">
+                <div class="percentage mb-3" *ngFor="let sale of sales">
                     <div class="title">
                         <p class="product name">{{sale.customername}}</p>
                         <p>500GB</p>
