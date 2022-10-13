@@ -72,13 +72,13 @@ export class ProductsComponent implements OnInit {
   }
 
   submit() {
+    this.utils.modalRef.hide()
     this.utils.isLoading = true
     const payload: IProduct = this.form.value
     if (this.isNew) {
       payload['total_added'] = this.quantity.value
       this.allSrv.postProduct(payload).subscribe((res: any) => {
         console.log(res);
-        this.utils.modalRef.hide()
         if (res.message == "Product already exist") {
           SWEET_ALERT('Error', `${res.message}`, 'error', 'error', 'OK', false, undefined, undefined)
         } else {
@@ -87,7 +87,6 @@ export class ProductsComponent implements OnInit {
         this.form.reset()
         this.getProducts()
       }, err => {
-        this.utils.modalRef.hide()
         if (err.status === 403) {
           this.router.navigate(['/dashboard'])
           SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)
@@ -103,12 +102,10 @@ export class ProductsComponent implements OnInit {
       payload['total_added'] = this.total_added
       this.allSrv.updateProduct(payload, payload['id']).subscribe(res => {
         console.log(res);
-        this.utils.modalRef.hide()
         SWEET_ALERT('Successful', `Product ${this.name.value} Updated successfully`, 'success', 'success', 'OK', false, undefined, undefined)
         this.form.reset()
         this.getProducts()
       }, err => {
-        this.utils.modalRef.hide()
         if (err.status === 403) {
           this.router.navigate(['/dashboard'])
           SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)

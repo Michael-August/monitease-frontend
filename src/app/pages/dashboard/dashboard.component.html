@@ -87,7 +87,7 @@
                 <div class="percentage mb-3" *ngFor="let sale of sales">
                     <div class="title">
                         <p class="product name">{{sale.customername}}</p>
-                        <p>500GB</p>
+                        <p>{{sale.item_sold_name}}</p>
                     </div>
                     <!-- <div class="percent-level"
                         [ngClass]="product.percent >= 50 ? 'bg-success-light' : (product.percent <= 49 && product.percent >= 40 ? 'bg-warning-light' : 'bg-danger-light')">

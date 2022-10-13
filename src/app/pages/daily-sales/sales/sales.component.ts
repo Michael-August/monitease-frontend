@@ -229,6 +229,7 @@ export class SalesComponent implements OnInit {
   }
 
   submit() {
+    this.utils.modalRef.hide()
     this.utils.isLoading = true
     const payload = this.form.value
     if (payload['paymentmethod'] == '') {
@@ -237,13 +238,11 @@ export class SalesComponent implements OnInit {
     console.log(payload);
     if (this.isNew) {
       this.allSrv.postSales(payload).subscribe(res => {
-        this.utils.modalRef.hide()
         SWEET_ALERT('Successful', `Sale of ${this.itemsold.value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
         this.form.reset()
         this.getSales()
       }, err => {
-        console.log(err);
-        this.utils.modalRef.hide()
+        // this.utils.modalRef.hide()
         if (err.status === 403) {
           this.router.navigate(['/dashboard'])
           SWEET_ALERT('Unauthorized', 'You are not authorized to perform this action', 'error', 'error', 'ok', false, undefined, undefined)

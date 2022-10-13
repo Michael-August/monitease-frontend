@@ -1,7 +1,7 @@
-export interface ISales {
-    id: number
+export interface ISales {    id: number
     customername: string
     itemsold: string
+    item_sold_name: string
     rate: number
     quantity: number
     havepaid: boolean

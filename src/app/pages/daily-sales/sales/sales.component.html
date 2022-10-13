@@ -85,7 +85,7 @@
                             <td>{{data['quantity']}}</td>
                             <td>{{data['rate']}}</td>
                             <td>{{data['totalprice']}}</td>
-                            <td>{{data['itemsold']}}</td>
+                            <td>{{data['item_sold_name']}}</td>
                             <td *ngIf="!data['havepaid']"><i (click)="togglePaid(data, paid)" class="fa fa-toggle-off fa-2x"></i></td>
                             <td *ngIf="data['havepaid']"><i (click)="togglePaid(data, paid)" class="fa fa-toggle-on text-success fa-2x"></i></td>
                             <td>{{data['datesold']}}</td>
