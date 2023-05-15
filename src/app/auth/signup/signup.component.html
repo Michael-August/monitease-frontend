@@ -19,7 +19,7 @@
                         <div class="form-group col-md-6">
                             <i class="fa fa-cc-amex envelope"></i>
                             <input formControlName="first_name" type="text" class="form-control" placeholder="First Name">
-                            <div class="text-danger" *ngIf="first_name.invalid && (first_name.touched || first_name.dirty)">
+                            <div class="text-danger" *ngIf="first_name.invalid && first_name.touched">
                                 <small>Enter First Name</small>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="form-group col-md-6">
                             <i class="fa fa-lastfm key"></i>
                             <input formControlName="last_name" type="text" class="form-control" placeholder="Last Name">
-                            <div class="text-danger" *ngIf="last_name.invalid && (last_name.touched || last_name.dirty)">
+                            <div class="text-danger" *ngIf="last_name.invalid && last_name.touched">
                                 <small>Enter Last Name</small>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <i class="fa fa-envelope envelope"></i>
                         <input formControlName="email" type="text" class="form-control" placeholder="Email">
-                        <div class="text-danger" *ngIf="email.invalid && (email.touched || email.dirty)">
+                        <div class="text-danger" *ngIf="email.invalid && email.touched">
                             <small>Enter Email</small>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <i class="fa fa-user key"></i>
                         <input formControlName="username" type="text" class="form-control" placeholder="Username">
-                        <div class="text-danger" *ngIf="username.invalid && (username.touched || username.dirty)">
+                        <div class="text-danger" *ngIf="username.invalid && username.touched">
                             <small>Enter Username</small>
                         </div>
                     </div>
@@ -53,10 +53,10 @@
                     <div class="form-group">
                         <i class="fa fa-phone key"></i>
                         <input formControlName="phone_number" type="tel" class="form-control" placeholder="Phone">
-                        <div class="text-danger" *ngIf="phone_number.invalid && (phone_number.touched || phone_number.dirty)">
+                        <div class="text-danger" *ngIf="phone_number.invalid && phone_number.touched">
                             <small>Enter Phone Number</small>
                         </div>
-                        <div class="text-danger" *ngIf="password.hasError('maxlength')">
+                        <div class="text-danger" *ngIf="phone_number.hasError('maxlength')">
                             <small>Phon number must not be more than 15</small>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <i class="fa fa-key key"></i>
                         <input formControlName="password" type="password" class="form-control" placeholder="Password">
-                        <div class="text-danger" *ngIf="password.invalid && (password.touched || password.dirty)">
+                        <div class="text-danger" *ngIf="password.invalid && password.touched">
                             <small>Enter Password</small>
                         </div>
                         <div class="text-danger" *ngIf="password.hasError('minlength')">
