@@ -60,9 +60,7 @@ export class SignupComponent implements OnInit {
     this.isLoading = true
     let payload: IRegister = this.form.value
     this.auth.register(payload).subscribe((res: any) => {
-      if (res.success) {
-        this.router.navigate(['/login'])
-      }
+      this.router.navigate(['/login'])
     }).add(() => this.isLoading = false)
   }
 

@@ -235,10 +235,14 @@ export class SalesComponent implements OnInit {
     if (payload['paymentmethod'] == '') {
       payload['paymentmethod'] = 'cash'
     }
-    console.log(payload);
+
+    if (payload['havepaid'] == '') {
+      payload['havepaid'] = false
+    }
+
     if (this.isNew) {
       this.allSrv.postSales(payload).subscribe(res => {
-        SWEET_ALERT('Successful', `Sale of ${this.itemsold.value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        SWEET_ALERT('Successful', `Sale of ${this.form.controls['item_sold_name'].value} added successfully`, 'success', 'success', 'OK', false, undefined, undefined)
         this.form.reset()
         this.getSales()
       }, err => {
@@ -256,7 +260,7 @@ export class SalesComponent implements OnInit {
       payload['id'] = this.utils.objectId
       this.allSrv.updateSales(payload, payload['id']).subscribe(res => {
         this.utils.modalRef.hide()
-        SWEET_ALERT('Successful', `Sale of ${this.itemsold.value} editted successfully`, 'success', 'success', 'OK', false, undefined, undefined)
+        SWEET_ALERT('Successful', `Sale of ${this.form.controls['item_sold_name'].value} editted successfully`, 'success', 'success', 'OK', false, undefined, undefined)
         this.form.reset()
         this.getSales()
       }, err => {
@@ -300,7 +304,7 @@ export class SalesComponent implements OnInit {
         this.isNew = false
         break;
       case 'DELETE':
-        (this.alertService.popUpAlert('Deleting', `Are you sure you want to Delete sale of ${data.itemsold} to ${data.customername}?`,
+        (this.alertService.popUpAlert('Deleting', `Are you sure you want to Delete sale of ${data.item_sold_name} to ${data.customername}?`,
           AlertType.Confirm, true) as Promise<any>).then((arg) => {
             if (arg.value) {
               this.process_delete(data.id);
